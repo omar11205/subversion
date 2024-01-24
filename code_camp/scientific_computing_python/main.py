@@ -4,6 +4,7 @@ text = "Hello Zaira"
 shift = 3
 custom_key = "python"
 
+
 def caesar(message, offset):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     encrypted_text = ''
