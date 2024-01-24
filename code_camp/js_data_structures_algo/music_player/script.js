@@ -95,6 +95,11 @@ const playSong = (id) => {
     audio.play();
 };
 
+const pauseSong = () => {
+    userData.songCurrentTime = audio.currentTime;
+    playButton.classList.remove("playing");
+    audio.pause();
+};
 
 
 //una función flecha ocupa menos identación que una función y su return puede ser automático o explícito
@@ -104,7 +109,7 @@ const renderSongs = (array) => {
         (song) => {
             return `
             <li id="song-${song.id}" class="playlist-song">
-            <button class="playlist-song-info">
+            <button class="playlist-song-info" onclick="playSong(${song.id})">
                 <span class="playlist-song-title">${song.title}</span>
                 <span class="playlist-song-artist">${song.artist}</span>
                 <span class="playlist-song-duration">${song.duration}</span>
@@ -124,6 +129,20 @@ const renderSongs = (array) => {
     
 }
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be nulll or undefined.
+
+const getCurrentSongIndex = () => {
+    return userData?.songs.indexOf(userData.currentSong);
+}
+
+playButton.addEventListener("click", () => {
+    if (userData?.currentSong === null) {
+      playSong(userData?.songs[0].id);
+    }else {
+      playSong(userData?.currentSong.id);
+    }
+});
+
+pauseButton.addEventListener("click",  pauseSong);
 
 renderSongs(userData?.songs);
 
