@@ -79,6 +79,24 @@ let userData =
     songCurrentTime: 0
 }
 
+const playSong = (id) => {
+    const song = userData?.songs.find((song) => song.id === id);
+    audio.src = song.src;
+    audio.title = song.title;
+  
+    if (userData?.currentSong === null || userData?.currentSong.id !== song.id) {
+      audio.currentTime = 0;
+    } else {
+      audio.currentTime = userData.songCurrentTime;
+    }
+    userData.currentSong = song;
+    playButton.classList.add("playing");
+  
+    audio.play();
+};
+
+
+
 //una función flecha ocupa menos identación que una función y su return puede ser automático o explícito
 const renderSongs = (array) => {
     //el método map devuelve un nuevo array a partir de uno ya existente y una función
@@ -100,9 +118,12 @@ const renderSongs = (array) => {
         }
         //el método join recoje los elementos individuales de un array y los concatena en un string con un separador ""
     ).join("");
+    console.log(typeof(songsHTML));
+    console.log(songsHTML);
     playlistSongs.innerHTML = songsHTML;
+    
 }
-console.log(typeof(playlistSongs));
-console.log(typeof(userData.songs));
-console.log(allSongs);
+//Optional chaining (?.) helps prevent errors when accessing nested properties that might be nulll or undefined.
+
 renderSongs(userData?.songs);
+
