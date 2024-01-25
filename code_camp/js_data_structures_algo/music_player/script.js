@@ -101,6 +101,30 @@ const pauseSong = () => {
     audio.pause();
 };
 
+const playNextSong = () => {
+    if (userData?.currentSong === null) {
+        playSong(userData?.songs[0].id);
+    } else {
+        const currentSongIndex = getCurrentSongIndex();
+        const nextSong = userData?.songs[currentSongIndex + 1];
+        playSong(nextSong.id)
+    } 
+}
+
+const playPreviousSong = () => {
+    if (userData?.currentSong === null){
+        return;
+    } else {
+        const currentSongIndex = getCurrentSongIndex();
+        const previousSong = userData?.songs[currentSongIndex - 1];
+        playSong(previousSong.id);
+    }
+}
+
+const highlightCurrentSong = () => {
+    const playlistSongElements = document.querySelectorAll(".playlist-song");
+    const songToHighlight = document.getElementById("")
+};
 
 //una función flecha ocupa menos identación que una función y su return puede ser automático o explícito
 const renderSongs = (array) => {
@@ -137,12 +161,16 @@ const getCurrentSongIndex = () => {
 playButton.addEventListener("click", () => {
     if (userData?.currentSong === null) {
       playSong(userData?.songs[0].id);
-    }else {
+    } else {
       playSong(userData?.currentSong.id);
     }
 });
 
 pauseButton.addEventListener("click",  pauseSong);
+
+nextButton.addEventListener("click",  playNextSong);
+
+previousButton.addEventListener("click",  playPreviousSong);
 
 renderSongs(userData?.songs);
 
