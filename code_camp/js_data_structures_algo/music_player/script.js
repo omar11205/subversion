@@ -91,8 +91,10 @@ const playSong = (id) => {
     }
     userData.currentSong = song;
     playButton.classList.add("playing");
-  
-    audio.play();
+    
+    highlightCurrentSong();
+    setPlayerDisplay();
+    audio.play();  
 };
 
 const pauseSong = () => {
@@ -109,7 +111,7 @@ const playNextSong = () => {
         const nextSong = userData?.songs[currentSongIndex + 1];
         playSong(nextSong.id)
     } 
-}
+};
 
 const playPreviousSong = () => {
     if (userData?.currentSong === null){
@@ -119,11 +121,27 @@ const playPreviousSong = () => {
         const previousSong = userData?.songs[currentSongIndex - 1];
         playSong(previousSong.id);
     }
-}
+};
+
+const setPlayerDisplay = () => {
+    const playingSong = document.getElementById("player-song-title");
+    const songArtist = document.getElementById("player-song-artist");
+    const currentTitle = userData?.currentSong?.title;
+    const currentArtist = userData?.currentSong?.artist;
+    playingSong.textContent = currentTitle ? currentTitle : "";
+    songArtist.textContent = currentArtist ? currentArtist : "";
+};
 
 const highlightCurrentSong = () => {
     const playlistSongElements = document.querySelectorAll(".playlist-song");
-    const songToHighlight = document.getElementById("")
+    const songToHighlight = document.getElementById(`song-${userData?.currentSong?.id}`);
+    playlistSongElements.forEach((songEl) => {
+        songEl.removeAttribute("aria-current");
+    });
+
+    if(songToHighlight){
+        songToHighlight.setAttribute("aria-current", "true");
+    }
 };
 
 //una función flecha ocupa menos identación que una función y su return puede ser automático o explícito
@@ -147,16 +165,20 @@ const renderSongs = (array) => {
         }
         //el método join recoje los elementos individuales de un array y los concatena en un string con un separador ""
     ).join("");
-    console.log(typeof(songsHTML));
-    console.log(songsHTML);
+
     playlistSongs.innerHTML = songsHTML;
     
-}
+};
 //Optional chaining (?.) helps prevent errors when accessing nested properties that might be nulll or undefined.
+
+const setPlayButtonAccessibleText = () => {
+    const song = userData?.currentSong || userData?.songs[0];
+    playButton.setAttribute("aria-label", song?.title ? `Play ${song.title}` : "Play");
+};
 
 const getCurrentSongIndex = () => {
     return userData?.songs.indexOf(userData.currentSong);
-}
+};
 
 playButton.addEventListener("click", () => {
     if (userData?.currentSong === null) {
