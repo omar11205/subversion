@@ -31,7 +31,7 @@ void decomposition(int number){
 			toDeco--;
 		}
 		
-		//prove if any combination has both composite numbers
+		//prove if any combination have both composite numbers
 		if (isComposite(toDeco) && isComposite(i)){
 			printf("The number %d is composed by the composed numbers %d + %d\n", number, i, toDeco);
 			return;
