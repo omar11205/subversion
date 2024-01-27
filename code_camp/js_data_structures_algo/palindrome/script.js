@@ -3,8 +3,8 @@ const textInput = document.getElementById('text-input');
 const resultDiv = document.getElementById('result');
 
 function isPalindrome(str) {
-    const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-    return cleanStr === cleanStr.split('').reverse().join('');
+  const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  return cleanStr === cleanStr.split('').reverse().join('');
 }
 
 checkBtn.addEventListener('click', function () {
