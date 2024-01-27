@@ -169,7 +169,7 @@ const myFavoriteFootballTeam =
           number: 22,
           isCaptain: false,
           nickname: null,
-        }
+        },
     ],
 };
 
@@ -185,24 +185,37 @@ worldCupYear.textContent = year;
 headCoach.textContent = coachName;
 
 const setPlayerCards = (arr = players) => {
-    playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname})=>{
-        `
+    playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname}) =>
+        ` 
             <div class="player-card">
                 <h2>${name} ${isCaptain ? "(Captain)" : ""}</h2>
                 <p>Position: ${position}</p>
                 <p>Number: ${number}</p>
                 <p>Nickname: ${nickname !== null ? nickname : "N/A"}</p>
             </div>
-        `;
-    }).join('');
+        `
+    ).join('');
 }
 
-playersDropdownList.addEventListener("change", (e)=>{
+playersDropdownList.addEventListener("change", (e) => {
     playerCards.innerHTML = '';
     switch (e.target.value){
         case "nickname":
             setPlayerCards(players.filter((player) => player.nickname !== null));
             break;
-        case 
-    };
+        case "forward":
+            setPlayerCards(players.filter((player) => player.position === "forward"));
+            break;
+        case "midfielder":
+            setPlayerCards(players.filter((player) => player.position === "midfielder"));
+            break;
+        case "defender":
+            setPlayerCards(players.filter((player) => player.position === "defender"));
+            break;
+        case "goalkeeper":
+            setPlayerCards(players.filter((player) => player.position === "goalkeeper"));
+            break;
+        default:
+            setPlayerCards();
+    }
 });
