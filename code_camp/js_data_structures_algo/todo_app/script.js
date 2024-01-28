@@ -16,6 +16,14 @@ const taskData = [];
 //obj who track the states (editing, discard)
 let currentTask = {};
 
+const reset = () => {
+    titleInput.value = '';
+    dateInput.value = '';
+    descriptionInput.value = '';
+    taskForm.classList.toggle("hidden");
+    currentTask = {};
+};
+
 //classlist.toggle("") add a new class or remove the existing class
 //removes the class "hidden" to show the form
 //the form overlays the addNewTask button
@@ -31,16 +39,48 @@ cancelBtn.addEventListener("click", () => confirmCloseDialog.close() );
 //close the modal and hides again the form, so the overlay is gone and
 //the addNewTast button appears again
 //Note: with two instructions or more  { } are necesary in the callback function
-discardBtn.addEventListener("click", () => 
-    confirmCloseDialog.close(),
-    taskForm.classList.toggle("hidden")
-);
+discardBtn.addEventListener("click", () => {
+    confirmCloseDialog.close();
+    reset();
+});
 
 
 taskForm.addEventListener("submit", (e) => {
     //stop the browser from refreshing after submitting the form
     e.preventDefault();
+
+    //findIndex returns the index of an element inside an array that first matches a condition
+    //you need to determine whether the task being added already exists or not
+    const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id );  
+    const taskObj = {
+        id: `${titleInput.value.toLowerCase().split(' ').join('-')}-${Date.now()}`,
+        title: titleInput.value,
+        date: dateInput.value,
+        description: descriptionInput.value 
+    };
+
+    if (dataArrIndex === -1){
+        taskData.unshift(taskObj);
+    }
+
+    taskData.forEach(({id, title, date, description}) => {
+        tasksContainer.innerHTML += `
+        <div class="task" id="${id}">
+            <p><strong>Title: </strong>${title}</p>
+            <p><strong>Date:</strong>${date}</p>
+            <p><strong>Description:</strong>${description}</p>
+            <button type="button" class="btn">Edit</button>
+            <button type="button" class="btn">Delete</button>
+        </div>
+        `
+    });
+
+    reset();
+
 });
 
 
+
+
+console.log(taskObj.id);
 
