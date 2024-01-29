@@ -11,7 +11,9 @@ const dateInput = document.getElementById("date-input");
 const descriptionInput = document.getElementById("description-input");
 
 //array who stores the tasks
-const taskData = [];
+//retrive the info from localstorage when the app has been alredy used OR, in the 
+//fist use of the aplication, since no local storage taskData will be equal to an empity Array
+const taskData = JSON.parse(localStorage.getItem("data")) || [];
 
 //obj who track the states (editing, discard)
 let currentTask = {};
@@ -32,6 +34,8 @@ const addOrUpdateTask = () => {
     } else {
         taskData[dataArrIndex] = taskObj;
     }
+
+    localStorage.setItem("data", JSON.stringify(taskData));
 
     updateTaskContainer();
     reset(); 
@@ -57,6 +61,7 @@ const deleteTask = (buttonEl) => {
     console.log(buttonEl.parentElement);
     buttonEl.parentElement.remove();
     taskData.splice(dataArrIndex, 1);
+    localStorage.setItem("data", JSON.stringify(taskData));
 };
 
 const editTask = (buttonEl) => {
@@ -76,6 +81,10 @@ const reset = () => {
     taskForm.classList.toggle("hidden");
     currentTask = {};
 };
+
+if (taskData.length){
+    updateTaskContainer();
+}
 
 //classlist.toggle("") add a new class or remove the existing class
 //removes the class "hidden" to show the form
