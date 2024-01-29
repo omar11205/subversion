@@ -1,6 +1,6 @@
-//Function pointers and callbacks
-
 #include <stdio.h>
+
+//Function pointers and callbacks
 
 void A(){
 	printf("Hello\n");

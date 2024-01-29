@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+//A Caesar cipher (or Caesar code), is a shift cipher. Is one of the most 
+//easy and most famous encryption systems. Uses the substitution of a letter
+//by another one further in the alphabet (offset) to encode a message.
+
 void caesar(char message[], int offset){
 	char *alphabet = "abcdefghijklmnopqrstuvwxyz";
 	int alphalen = strlen(alphabet);
