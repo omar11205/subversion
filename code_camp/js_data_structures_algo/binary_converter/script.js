@@ -16,12 +16,31 @@ const checkUserInput = () => {
     numberInput.value = '';
 }
 
-function decimalToBinary(input){
-    const base = Math.ceil(Math.log2(input));
-    console.log(base);
-    /*for (let i = 0; i<base; i++){
+function recur(res, upper){
+    if(res >= (upper)){
+        return '1';
+    }  else {
+        return '0';
+    }
+}
 
-    }*/
+function decimalToBinary(input){
+    let base = Math.ceil(Math.log2(input))+1;
+    let upper = (Math.pow(2, base))/2;
+    let res = 0;
+    let resultString = '';
+    res = input;
+    
+    for (let i = 0; i<base; i++){
+        console.log(upper);
+        resultString = resultString.concat(recur(res, upper));
+        if(recur(res, upper) || !(res - upper) ){
+            
+        }res = res - upper/2;
+        upper = upper/2;
+        //console.log(upper);
+    }
+    console.log(resultString);
 }
 
 convertBtn.addEventListener("click", checkUserInput);
@@ -30,3 +49,4 @@ numberInput.addEventListener("keydown", (e) => {
         checkUserInput();
     }
 });
+
