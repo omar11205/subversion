@@ -9,8 +9,6 @@
 <body>
     
     <?php
-        /*  */ 
-
         function classifyAttendances($concepts, $attendanceIn, $attendanceOut){
             $decoded = json_decode($concepts, true);
             $classify = array();
