@@ -25,22 +25,11 @@ function recur(res, upper){
 }
 
 function decimalToBinary(input){
-    let base = Math.ceil(Math.log2(input))+1;
-    let upper = (Math.pow(2, base))/2;
-    let res = 0;
-    let resultString = '';
-    res = input;
+    let inputs = [];
+    let quotients = [];
+    let remainders
     
-    for (let i = 0; i<base; i++){
-        console.log(upper);
-        resultString = resultString.concat(recur(res, upper));
-        if(recur(res, upper) || !(res - upper) ){
-            
-        }res = res - upper/2;
-        upper = upper/2;
-        //console.log(upper);
-    }
-    console.log(resultString);
+    input = 0;
 }
 
 convertBtn.addEventListener("click", checkUserInput);
