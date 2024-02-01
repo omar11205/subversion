@@ -16,14 +16,6 @@ const checkUserInput = () => {
     numberInput.value = '';
 }
 
-function recur(res, upper){
-    if(res >= (upper)){
-        return '1';
-    }  else {
-        return '0';
-    }
-}
-
 function decimalToBinary(input){
     let inputs = [];
     let quotients = [];

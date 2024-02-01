@@ -9,6 +9,7 @@
 <body>
     
     <?php
+        /*  */ 
 
         function classifyAttendances($concepts, $attendanceIn, $attendanceOut){
             $decoded = json_decode($concepts, true);
@@ -16,31 +17,31 @@
             $startAtt = DateTime::createFromFormat('H:i', $attendanceIn);
             $endAtt = DateTime::createFromFormat('H:i', $attendanceOut);
 
-            //si la hora de entrada del trabajador es mayor que la de salida agregar un día a la hora de salida
+            //If the worker's arrival time is greater than the departure time, add a day to the departure time
             if ($endAtt < $startAtt){
                 $endAtt->modify('+1 day');
             }
             
-            //pasar de string "HH:mm" a DateTime las horas de los conceptos dentro del array $decoded
+            //pass from string "HH:mm" to DateTime the hours of the concepts within the $decoded array
             foreach($decoded as &$concept){
                 $concept['start'] = DateTime::createFromFormat('H:i', $concept['start']);
                 $concept['end'] = DateTime::createFromFormat('H:i', $concept['end']);
 
-                //si el fin del concepto es menor que el inicio del concepto agregar un día al fin del concepto
+                //if the end of the concept is less than the beginning of the concept add a day to the end of the concept
                 if ($concept['end'] < $concept['start']){
                     $concept['end']->modify('+1 day');
                 }
             }
             unset($concept);
 
-            //ordenar de menor a mayor los conceptos de $decoded según la hora de inicio del concepto
+            //order $decoded concepts from smallest to largest according to the start time of the concept
             $startSortTimes = array_column($decoded, 'start');
             array_multisort($startSortTimes, SORT_ASC, $decoded);
 
             foreach($decoded as $concept){
-                //filtra el/los intervalo(s) de tiempo de concepto(s) donde está contenido el intervalo de tiempo trabajado (endAtt - startAtt)
+                //filters the time interval(s) of concept(s) where the worked time interval is contained (endAtt - startAtt)
                 if($startAtt <= $concept['end'] && $endAtt >= $concept['start']){
-                    //determina el tiempo que se ha trabajado por cada concepto como la diferencia entre: el mínimo de entre la hora de salida y la hora de fin del concepto, y el máximo de entre la hora de entrada y la hora de comienzo del concepto
+                    //determines the time that has been worked for each concept as the difference between: the minimum between the departure time and the end time of the concept, and the maximum between the entry time and the beginning time of the concept
                     $dateDiff = min($concept['end'], $endAtt)->diff(max($concept['start'], $startAtt));
                     $hours = $dateDiff->h;
                     $minutes = $dateDiff->i;
