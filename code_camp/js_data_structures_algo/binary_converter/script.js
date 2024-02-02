@@ -16,7 +16,7 @@ const checkUserInput = () => {
     numberInput.value = '';
 }
 
-function decimalToBinary(input){
+function decimalToBinaryExplain(input){
     let inputs = [];
     let quotients = [];
     let remainders = [];
@@ -39,6 +39,21 @@ function decimalToBinary(input){
     console.log("Remainders: ", remainders);
     console.log("Floor 0.5 = ", Math.floor(0.5));
     result.innerText = remainders.reverse().join('');
+}
+
+function decimalToBinary(input){
+    let binary = "";
+
+    if (input === 0) {
+      binary = "0";
+    }
+  
+    while (input > 0) {
+      binary = (input % 2) + binary;
+      input = Math.floor(input / 2);
+    }
+  
+    result.innerText = binary;
 }
 
 convertBtn.addEventListener("click", checkUserInput);
