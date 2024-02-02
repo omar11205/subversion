@@ -56,6 +56,23 @@ function decimalToBinary(input){
     result.innerText = binary;
 }
 
+//recursion example
+const countDown = (number) => {
+    console.log(number);
+    //a function who descends from a given number to 0 recursively
+    //the base case is when number is equal to 0, then the function returns
+    if (number === 0){
+        return;
+    } else {
+        //Recursive functions also have a recursive case, which is where the function calls itself.
+        //number - 1, the argument needs to be lowered 
+        countDown(number - 1);
+    }
+    console.log(number);
+}
+
+countDown(14);
+
 convertBtn.addEventListener("click", checkUserInput);
 numberInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
