@@ -18,17 +18,27 @@ const romanArray = [
   [ 'I',    1]
 ];
 
-const convertToRoman = (number) => {
-  const recur = (remainder, romanArray) => {
-    if (remainder == 0){
+const convertToRoman = (arabic) => {
+  const recur = (residual, romanArray) => {
+    if (residual == 0){
       return '';
     } 
-    const [[numeral, value], ...tail] = romanArray;
-    let output = numeral.repeat(remainder / value) + recur(remainder % value, tail);
+    const [[romanLetter, equivalent], ...rest] = romanArray;
+    let output = romanLetter.repeat(residual / equivalent) + recur(residual % equivalent, rest);
+    console.log("Output ", output);
     return output;
   };
-  
-  return recur(number, romanArray);
+
+  return recur(arabic, romanArray);
+};
+
+const convertToRomanTest = () => {
+  const [[numeral, value], ...tail] = romanArray;
+  let output = numeral.repeat(1);
+  console.log(numeral);
+  console.log(value);
+  console.log(tail);
+  console.log(output);
 };
 
 convertBtn.addEventListener('click', () => {
