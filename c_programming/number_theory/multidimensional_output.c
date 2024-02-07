@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int main(void) {
-	int row = 3, col = 4, i, j, count;
+	const int row = 3; 
+	const int col = 4; 
+	int i; 
+	int j; 
+	int count;
 	
 	int (*arr)[row][col] = malloc(sizeof*arr);
 	
