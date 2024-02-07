@@ -13,11 +13,15 @@ const calculate = () => {
     const median = getMedian(numbers);
     const mode = getMode(numbers);
     const range = getRange(numbers);
+    const variance = getVariance(numbers);
+    const standardDeviation = getStandardDeviation(numbers);
 
     document.querySelector("#mean").textContent = mean;
     document.querySelector("#median").textContent = median;
     document.querySelector("#mode").textContent = mode;
     document.querySelector("#range").textContent = range;
+    document.querySelector("#variance").textContent = variance;
+    document.querySelector("#standardDeviation").textContent = standardDeviation;
 }
 
 function getMean (array){
@@ -30,7 +34,8 @@ function getMean (array){
 const getMeanV2 = (array) => array.reduce((acc, el) => acc + el, 0)/array.length;
 
 const getMedian = (array) => {
-    const sorted = array.sort((a,b)=>a-b);
+    /* The .sort() method mutates the array it's called on. It is generally bad practice to mutate a function parameter, which array is. To fix this, add an empty .slice() call before your .sort() method. The empty .slice() call will make a shallow copy of the array, which you are free to mutate. */ 
+    const sorted = array.slice().sort((a,b)=>a-b);
     const median = array.length % 2 === 0 ? getMean([sorted[array.length / 2], sorted[array.length / 2 - 1]]) : sorted[Math.floor(array.length / 2)];
     return median;
 };
@@ -60,8 +65,22 @@ const getRange = (array) => Math.max(...array) - Math.min(...array);
 
 const getVariance = (array) => {
   const mean = getMean(array);
-  const differences = array.map(el => el - mean);
+  /*const differences = array.map(el => el - mean);
   const squaredDifferences = differences.map((el)=>el ** 2);
+  const sumSquaredDifferences = squaredDifferences.reduce((el, acc)=>{return acc + el}, 0)*/
+  //in a compacted way:
+  const variance = array.reduce((acc, el) => {
+    const difference = el - mean;
+    const squared = difference ** 2;
+    return acc + squared/array.length;
+  }, 0);
+  return variance;
 };
 
+const getStandardDeviation = (array) =>{
+    const variance = getVariance(array);
+    //const standardDeviation = Math.pow(variance, (1/2));
+    const standardDeviation = Math.sqrt(variance);
+    return standardDeviation;
+};
 
