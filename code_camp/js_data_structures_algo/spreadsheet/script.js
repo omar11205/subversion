@@ -26,13 +26,19 @@ const evalFormula = (x, cells) => {
     const idToText = id => cells.find(cell => cell.id === id).value;
     const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
     const rangeFromString = (num1, num2) => range(parseInt(num1), parseInt(num2));
-    const elemValue = num => {
-      const inner = character => {
-  
-      }
-      return inner;
-    }
-  }
+    /* The concept of returning a function within a function is called currying. This approach allows you to create a variable that holds a function to be called later, but with a reference to the parameters of the outer function call. */
+
+    /* For example: curry is a function which takes a soup parameter and returns a function which takes a veggies parameter. */
+    //const curry = soup => veggies => {};
+
+    const elemValue = num => character => idToText(character + num);
+    /* the callback functions for methods like .map() can be stored in variables. For example elemValue */
+    const addCharacters = character1 => character2 => num => charRange(character1, character2).map(elemValue(num));
+    /* Your addCharacters(char1) is also returning a function, which returns another function. You need to make another function call to access that innermost function reference for the .map() callback. JavaScript allows you to immediately invoke returned functions: Immediately invoke the function returned from your addCharacters(char1) call, and pass char2 as the argument. */ 
+    // for unused parameters underscoreit: "_parameter"
+    const rangeExpanded = x.replace(rangeRegex, (_match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)(char2)));
+    const cellRegex = /[A-J][1-9][0-9]?/gi;
+}
 
 window.onload = () => {
     const container = document.getElementById("container");
