@@ -23,11 +23,12 @@ const helpRegex = /please help|assist me/i;
 // if i dont need to store the match in a group i can use (?:) at the beginning of the group to create a non-capturing group
 const dollarRegex = /[0-9]+ (?:hundred|thousand|million|billion)? dollars/i;
 //\s check for spaces (used for not mach composed words like money-free)
-//
+//(?:^|\s) and (?:$|\s) are non capturing groups to match spaces or no spaces in the beginning or the end of the string
 const freeRegex = /(?:^|\s)fr[e3][e3] m[o0]n[e3]y\s(?:$|\s)/i;
+const stockRegex = /[s5][t7][o0][c{[(]k [a@4]l[e3]r[t7]/i;
+const dearRegex = /(?:^|\s)d[e3][a@4]r fr[i1|][e3]nd(?:$|\s)/i;
 
-
-const denyList =[helpRegex, dollarRegex, freeRegex];
+const denyList =[helpRegex, dollarRegex, freeRegex, stockRegex, dearRegex];
 
 //match return the string that matches
 const isSpamMatch = (msg) => {msg.match(helpRegex); console.log(msg)};
