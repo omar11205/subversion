@@ -25,7 +25,7 @@ clearBtn.addEventListener("click", function() {
 
 function validatePhoneNumber(phoneNumber) {
     // Regular expression to validate US phone number format
-    //https://developerking.medium.com/how-to-integrate-international-phone-number-validation-in-input-field-with-javascript-55d8e4b432c4
+    //https://techpen.dev/blog/how-to-create-a-telephone-number-validator/
     const phoneRegex = /^1?\s?(\d{3}|\(\d{3}\))-?\s?\d{3}-?\s?\d{4}$/gm;
     return phoneRegex.test(phoneNumber);
 }
