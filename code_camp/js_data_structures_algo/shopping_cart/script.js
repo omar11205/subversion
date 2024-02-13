@@ -86,3 +86,41 @@ let products = [
         category: "Cupcake"
     }
 ];
+
+//({ name, id, price, category}) is used for desestructuring the array products
+products.forEach(({ name, id, price, category})=>{
+    dessertCards.innerHTML += `
+    <div class="dessert-card">
+        <h2>${name}</h2>
+        <p class="dessert-price">${price} $</p>
+        <p class="product-category">Category:$${category}</p>
+        <button id="${id}" class="btn add-to-cart-btn">Add to cart</button>
+    </div>
+    `;
+});
+
+/* In JavaScript, a class is like a blueprint for creating objects. It allows you to define a set of properties and methods, and instantiate (or create) new objects with those properties and methods. */
+
+class ShoppingCart {
+    /*Classes have a special constructor method, which is AUTOMATICALLY called when a new instance of the class is created.*/
+    constructor() {
+        /*The this keyword in JavaScript is used to refer to the current object. Depending on where this is used, what it references changes. In the case of a class, it refers to the instance of the object being constructed. You can use the this keyword to set the properties of the object being instantiated.*/ 
+        this.items = [];
+        this.total = 0;
+        this.taxRate = 8.25;
+    }
+
+    addItem(id, products){
+        const product = products.find((item)=>item.id === id);
+        //desestructuring name and product that comes from product
+        const {name, price} = product;
+        this.items.push(product);
+        const totalCountPerProduct = {};
+        this.items.forEach((dessert)=>{
+            //to prevent NaN resulting from undefined + 1, because dessert.id doesnt exist in the first attempt
+            totalCountPerProduct[dessert.id] = (totalCountPerProduct[dessert.id] || 0) + 1;
+        });
+        const currentProductCount = totalCountPerProduct[product.id];
+    };
+    
+};
