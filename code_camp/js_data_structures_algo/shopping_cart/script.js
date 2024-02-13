@@ -121,6 +121,37 @@ class ShoppingCart {
             totalCountPerProduct[dessert.id] = (totalCountPerProduct[dessert.id] || 0) + 1;
         });
         const currentProductCount = totalCountPerProduct[product.id];
+        const currentProductCountSpan = document.getElementById(`product-count-for-id${id}`);
+        currentProductCount > 1 ? currentProductCountSpan.textContent = `${currentProductCount}x`
+        : productsContainer.innerHTML += `
+            <div id=dessert${id} class="product">
+                <p>
+                    <span class="product-count" id="product-count-for-id${id}">${name}</span>
+                </p>
+                <p>${price}</p>
+            </div>
+        `;
     };
     
 };
+
+//instanciate a object of the class ShoppingCart
+const cart = new ShoppingCart();
+//const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
+/*You need to iterate through the buttons in your addToCartBtns variable. However, .getElementsByClassName() returns a Collection, which does not have a forEach method. so: */
+ 
+const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
+//addToCartBtns are an array of nodes, and forEach do not work in this data types directly so wrap the elements of addToCartBtns in an array with [...addToCartBtns]
+
+[...addToCartBtns].forEach(
+    (btn)=>{btn.addEventListener('click', (event)=>{
+        //id will be catched as string
+        cart.addItem(Number(event.target.id), products);
+    })}
+);
+
+cartBtn.addEventListener('click',()=>{
+    isCartShowing = !isCartShowing;
+    showHideCartSpan.textContent = isCartShowing ? 'Hide' : 'Show';
+    cartContainer.style.display = isCartShowing ? "block" : "none";
+});
