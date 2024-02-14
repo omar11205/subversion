@@ -93,7 +93,7 @@ products.forEach(({ name, id, price, category})=>{
     <div class="dessert-card">
         <h2>${name}</h2>
         <p class="dessert-price">${price} $</p>
-        <p class="product-category">Category:$${category}</p>
+        <p class="product-category">Category: ${category}</p>
         <button id="${id}" class="btn add-to-cart-btn">Add to cart</button>
     </div>
     `;
@@ -132,6 +132,48 @@ class ShoppingCart {
             </div>
         `;
     };
+
+    getCounts(){
+        return this.items.length; 
+    }
+
+    clearCart(){
+        if (!this.items.length){
+            alert("Your shopping cart is already empty");
+            return;
+        }
+
+        const isCartCleared = confirm(
+            "Are you sure you want to clear all items from your shopping cart?"
+        );
+
+        if (isCartCleared) {
+            this.items = [];
+            this.total = 0;
+            productsContainer.innerHTML = "";
+            totalNumberOfItems.textContent = 0;
+            cartSubTotal.textContent = 0;
+            cartTaxes.textContent = 0;
+            cartTotal.textContent = 0;
+        }
+
+    }
+
+    calculateTaxes(amount){
+        //toFixed will round the operation to two decimal points and return a string
+        //to perform calculations use parseFloat to convert from string to float with the righ number of decimal places (2) in this case.
+        return parseFloat(((this.taxRate / 100) * amount).toFixed(2));
+    }
+
+    calculateTotal(){
+        const subTotal = this.items.reduce((total, item)=>total+item.price, 0);
+        const tax = this.calculateTaxes(subTotal);
+        this.total = subTotal + tax;
+        cartSubTotal.textContent = `$${subTotal.toFixed(2)}`;
+        cartTaxes.textContent = `$${tax.toFixed(2)}`;
+        cartTotal.textContent = `$${this.total.toFixed(2)}`;
+        return this.total;
+    }
     
 };
 
@@ -147,6 +189,8 @@ const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
     (btn)=>{btn.addEventListener('click', (event)=>{
         //id will be catched as string
         cart.addItem(Number(event.target.id), products);
+        totalNumberOfItems.textContent = cart.getCounts();
+        cart.calculateTotal();
     })}
 );
 
@@ -155,3 +199,6 @@ cartBtn.addEventListener('click',()=>{
     showHideCartSpan.textContent = isCartShowing ? 'Hide' : 'Show';
     cartContainer.style.display = isCartShowing ? "block" : "none";
 });
+
+//further work: study the context of this and the hoisting for better understanding in the use of bind()
+clearCartBtn.addEventListener('click', cart.clearCart.bind(cart));
