@@ -79,11 +79,31 @@ class Platform {
 }
 
 const player = new Player();
-const platformPositions = [];
+const platformPositions = [
+  { x: 500, y: 450 },
+  { x: 700, y: 400 },
+  { x: 850, y: 350 },
+  { x: 900, y: 350 },
+  { x: 1050, y: 150 },
+  { x: 2500, y: 450 },
+  { x: 2900, y: 400 },
+  { x: 3150, y: 350 },
+  { x: 3900, y: 450 },
+  { x: 4200, y: 400 },
+  { x: 4400, y: 200 },
+  { x: 4700, y: 150 }
+];
+
+const platforms = platformPositions.map(
+  (platform) => new Platform(platform.x, platform.y)
+);
 
 const animate = () => {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  platforms.forEach((platform) => {
+    platform.draw();
+  });
   player.update();
 
   if (keys.rightKey.pressed && player.position.x < 400) {
@@ -92,6 +112,55 @@ const animate = () => {
     player.velocity.x = -5;
   } else {
     player.velocity.x = 0;
+  }
+
+  if (keys.rightKey.pressed && isCheckpointCollisionDetectionActive) {
+    platforms.forEach((platform) => {
+      platform.position.x -= 5;
+    });
+  } else if (keys.leftKey.pressed && isCheckpointCollisionDetectionActive) {
+    platforms.forEach((platform) => {
+      platform.position.x += 5;
+    });
+  }
+
+}
+
+const keys = {
+  rightKey: {
+    pressed: false
+  },
+  leftKey: {
+    pressed: false
+  }
+};
+
+const movePlayer = (key, xVelocity, isPressed) => {
+  if (!isCheckpointCollisionDetectionActive) {
+    player.velocity.x = 0;
+    player.velocity.y = 0;
+    return;
+  }
+
+  switch (key) {
+    case "ArrowLeft":
+      keys.leftKey.pressed = isPressed;
+      if (xVelocity === 0) {
+        player.velocity.x = xVelocity;
+      }
+      player.velocity.x -= xVelocity;
+      break;
+    case "ArrowUp":
+    case " ":
+    case "Spacebar":
+      player.velocity.y -= 8;
+      break;
+    case "ArrowRight":
+      keys.rightKey.pressed = isPressed;
+      if (xVelocity === 0) {
+        player.velocity.x = xVelocity;
+      }
+      player.velocity.x += xVelocity;
   }
 }
 
@@ -102,4 +171,11 @@ const startGame = () => {
 }
   
 startBtn.addEventListener("click", startGame);
-  
+
+window.addEventListener("keydown", ({ key }) => {
+  movePlayer(key, 8, true);
+});
+
+window.addEventListener("keyup", ({ key }) => {
+  movePlayer(key, 0, false);
+});
