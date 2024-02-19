@@ -49,9 +49,37 @@ const rollDice = () =>{
     });
 };
 
+const updateStats = () => {
+    currentRoundRollsText.textContent = rolls;
+    currentRoundText.textContent = round;
+};
+
+//algorithm that tracks any duplicates found in diceValuesArr and displays a score next to the first two radio buttons
+let getHighestDuplicates = (arr) => {
+    //count the number of occurrences for each unique number in the arr
+    const counts = {};
+};
+
 rollDiceBtn.addEventListener("click", ()=>{
     //For each round in the game, users are allowed to roll the dice a maximum of three times.
     if(rolls === 3){
         alert("You have made three rolls this round. Please select a score.");
+    } else {
+        rolls++;
+        rollDice();
+        updateStats();
+        updateRadioOption(0, 10);
     }
 });
+
+console.log(scoreInputs);
+console.log(listOfAllDice);
+
+const updateRadioOption = (optionNode, score)=>{
+    scoreInputs[optionNode].disabled = false;
+    scoreInputs[optionNode].value = score;
+    //To display the current score, update the text content for the span element next to the radio button to be the following template literal
+    scoreSpans[optionNode].textContent = `, score = ${score}`;
+}
+
+
