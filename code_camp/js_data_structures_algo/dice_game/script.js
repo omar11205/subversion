@@ -12,3 +12,46 @@ const rulesBtn = document.getElementById("rules-btn");
 
 let isModalShowing = false;
 let diceValuesArr = [];
+let score = 0;
+let totalScore = 0;
+let round = 1;
+let rolls = 0;
+
+//functionality to show the ruless to display on the screen 
+rulesBtn.addEventListener("click", ()=>{
+    //every time the user clicks on the rules button, the current boolean value 
+    //for isModalShowing toggle between true and false
+    isModalShowing = !isModalShowing;
+    if(isModalShowing){
+        rulesBtn.textContent = "Hide Rules";
+        rulesContainer.style.display = "block";
+    } else {
+        rulesBtn.textContent = "Show Rules";
+        rulesContainer.style.display = "none";
+    }
+
+});
+
+const rollDice = () =>{
+    diceValuesArr = [];
+    //when the user rolls the dice, you will need to generate 5 random numbers 
+    //representing each dice value
+    for (let i = 0; i<5; i++){
+        //for each iteration of the loop you will need to generate a random number
+        //that represents one of the six possible values found on a dice
+        const randomDice = Math.floor(Math.random() * 6) + 1;
+        diceValuesArr.push(randomDice);
+    }
+    //forEach() calls a function for each element in an array
+    listOfAllDice.forEach((dice, index)=>{
+        dice.textContent = diceValuesArr[index];
+
+    });
+};
+
+rollDiceBtn.addEventListener("click", ()=>{
+    //For each round in the game, users are allowed to roll the dice a maximum of three times.
+    if(rolls === 3){
+        alert("You have made three rolls this round. Please select a score.");
+    }
+});
