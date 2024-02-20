@@ -43,9 +43,9 @@ const rollDice = () =>{
         diceValuesArr.push(randomDice);
     }
     //forEach() calls a function for each element in an array
-    listOfAllDice.forEach((dice, index)=>{
-        dice.textContent = diceValuesArr[index];
-
+    listOfAllDice.forEach((dice, noindex)=>{
+        dice.textContent = diceValuesArr[noindex];
+        //console.log("Current value of index inside forEach: ", noindex);
     });
 };
 
@@ -58,7 +58,27 @@ const updateStats = () => {
 let getHighestDuplicates = (arr) => {
     //count the number of occurrences for each unique number in the arr
     const counts = {};
+    for (const num of arr){
+        /* For each iteration in the arr, you will need to check if the current number exists in the counts object. If not, start with 1.*/ 
+        if(counts[num]){
+            counts[num]++
+        } else {
+            counts[num] = 1;
+        }
+    }
+    //tracks of whan a particula number appears tree of four times within the arr
+    //let highestCount = 0;
+
+    /*for (const num of arr){
+
+    }*/
+    return counts;
+
 };
+//console.log(listOfAllDice);
+
+let duplica = getHighestDuplicates([1,2,2,3,3,100]);
+console.log(duplica);
 
 rollDiceBtn.addEventListener("click", ()=>{
     //For each round in the game, users are allowed to roll the dice a maximum of three times.
@@ -69,11 +89,10 @@ rollDiceBtn.addEventListener("click", ()=>{
         rollDice();
         updateStats();
         updateRadioOption(0, 10);
+        console.log(listOfAllDice);
     }
 });
 
-console.log(scoreInputs);
-console.log(listOfAllDice);
 
 const updateRadioOption = (optionNode, score)=>{
     scoreInputs[optionNode].disabled = false;
