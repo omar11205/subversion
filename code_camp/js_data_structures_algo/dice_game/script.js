@@ -17,8 +17,6 @@ let totalScore = 0;
 let round = 1;
 let rolls = 0;
 
-
-
 const rollDice = () =>{
     diceValuesArr = [];
     //when the user rolls the dice, you will need to generate 5 random numbers 
@@ -98,8 +96,20 @@ let getHighestDuplicates = (arr) => {
     //If the user does not get a "Three of a kind" or "Four of kind", then they will not receive any points for that round.
     updateRadioOption(5, 0);
     console.log(highestCount);
+};
 
+const detectFullHouse = (arr) => {
+    const counts = {};
+    for(const num of arr){
+        counts[num] = counts[num] ? counts[num] + 1 : 1; 
+    }
 
+    const hasThreeOfAKind = Object.values(counts).includes(3);
+    const hasPair = Object.values(counts).includes(2);
+    
+    if (hasThreeOfAKind && hasPair){
+        updateRadioOption(2, 25);
+    }
 };
 
 const resetRadioOption =()=>{
@@ -122,6 +132,14 @@ const resetGame =()=>{
     totalScore = 0;
     rolls = 0;
     round = 1;
+    listOfAllDice.forEach((dice, index) => {
+        dice.textContent = diceValuesArr[index];
+    });
+    totalScoreText.textContent = totalScore;
+    scoreHistory.innerHTML = "";
+    currentRoundRollsText.textContent = rolls;
+    currentRoundText.textContent = round;
+    resetRadioOption();
 };
 
 rollDiceBtn.addEventListener("click", ()=>{
@@ -172,7 +190,10 @@ keepScoreBtn.addEventListener("click", ()=>{
         updateScore(selectedValue, achieved);
         //According to the rules, there should be a total of six rounds and then the game ends with the final score.
         if(round>6){
-            setTimeout(()=>{alert(`Game Over! Your total score is ${totalScore}`)}, 500);
+            setTimeout(()=>{
+                alert(`Game Over! Your total score is ${totalScore}`);
+                resetGame();
+            }, 500);
         }
     } else {
         alert("Please select an option or roll the dice");
