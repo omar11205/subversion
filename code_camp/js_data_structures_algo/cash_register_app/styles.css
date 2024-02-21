@@ -1,0 +1,51 @@
+body {
+    background-color: #000000;
+    font-family: serif, sans-serif;
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+
+.container{
+    text-align: center;
+}
+
+h1{
+   color: aliceblue;
+   text-align: center; 
+   margin: auto;
+}
+
+input[type="number"] {
+    margin: auto;
+}
+
+label{
+    color: aliceblue;
+    text-align: center; 
+    margin: auto ;
+}
+
+#change-due {
+    margin-bottom: 10px;
+    text-align: center; 
+    color: floralwhite;
+    margin: auto;
+}
+
+#purchase-btn {
+    text-align: center;
+    margin: auto;
+}
+
+
+@media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    input[type="number"] {
+      font-size: 14px;
+    }
+}
