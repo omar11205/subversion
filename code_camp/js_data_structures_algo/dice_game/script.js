@@ -54,6 +54,13 @@ const updateStats = () => {
     currentRoundText.textContent = round;
 };
 
+const updateRadioOption = (optionNode, score)=>{
+    scoreInputs[optionNode].disabled = false;
+    scoreInputs[optionNode].value = score;
+    //To display the current score, update the text content for the span element next to the radio button to be the following template literal
+    scoreSpans[optionNode].textContent = `, score = ${score}`;
+}
+
 //algorithm that tracks any duplicates found in diceValuesArr and displays a score next to the first two radio buttons
 let getHighestDuplicates = (arr) => {
     //count the number of occurrences for each unique number in the arr
@@ -66,39 +73,55 @@ let getHighestDuplicates = (arr) => {
             counts[num] = 1;
         }
     }
-    //tracks of whan a particula number appears tree of four times within the arr
-    //let highestCount = 0;
+    //tracks of when a particular number appears tree of four times within the arr
+    let highestCount = 0;
 
-    /*for (const num of arr){
+    for (const num of arr){
+        const count = counts[num];
 
-    }*/
-    return counts;
+        //Tree of a kind
+        if (count >= 3 && count > highestCount){
+            highestCount = count;
+        }
+        //Four of a kind
+        if (count >= 3 && count > highestCount){
+            highestCount = count;
+        }
+        
+    }
+
+    //If the user rolls a "Three of a kind" or "Four of a kind", then they will receive a score totalling the sum of all five dice values.  
+    const sumOfAllDice = diceValuesArr.reduce((a,b)=>a+b, 0);
+        
+    if(highestCount >= 4){   
+        updateRadioOption(1, sumOfAllDice);  
+    }
+
+    if (highestCount >= 3){
+        updateRadioOption(0, sumOfAllDice);
+    }
+
+    //If the user does not get a "Three of a kind" or "Four of kind", then they will not receive any points for that round.
+    updateRadioOption(5, 0);
+    console.log(highestCount);
+
 
 };
-//console.log(listOfAllDice);
 
-let duplica = getHighestDuplicates([1,2,2,3,3,100]);
-console.log(duplica);
 
 rollDiceBtn.addEventListener("click", ()=>{
     //For each round in the game, users are allowed to roll the dice a maximum of three times.
-    if(rolls === 3){
+    if(rolls === 80){
         alert("You have made three rolls this round. Please select a score.");
     } else {
         rolls++;
         rollDice();
         updateStats();
-        updateRadioOption(0, 10);
-        console.log(listOfAllDice);
+        getHighestDuplicates(diceValuesArr);
     }
 });
 
 
-const updateRadioOption = (optionNode, score)=>{
-    scoreInputs[optionNode].disabled = false;
-    scoreInputs[optionNode].value = score;
-    //To display the current score, update the text content for the span element next to the radio button to be the following template literal
-    scoreSpans[optionNode].textContent = `, score = ${score}`;
-}
+
 
 
