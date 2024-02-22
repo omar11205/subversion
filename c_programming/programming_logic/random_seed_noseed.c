@@ -4,11 +4,11 @@
 
 /*generate alleatory whole numbers between 0 to RAND_MAX (32000)*/
 /* num = A + rand() % (B - A + 1)*/
-/* the function aleatory will return a pointer to an array of randomly generated numbers or NULL is there any problem with the parameters in the calling */
-int *aleatory(int seed, int a, int b, int many){ //a left limit, b right limit,  
+/* the function aleatory will return a pointer to an array of randomly generated numbers or NULL if there are any problem with the parameters in the calling */
+int *aleatory(int seed, int a, int b, int many){ //seed = 1 for time seed random generation, a left limit, b right limit,  
 	int *res;
-	if(b<a || b == a){ //control for the 
-		printf("Interval error: b<a or b=a \n");
+	if(b<=a){ //error control
+		printf("Interval error: b<=a or b=a \n");
 		void *res = malloc(sizeof(int)); //recasting res to a void pointer to return NULL instead 0 
 		res = NULL;
 		return res;
