@@ -1,6 +1,8 @@
 body {
   background-image: url(https://cdn.freecodecamp.org/curriculum/css-cafe/beans.jpg);
   font-family: sans-serif;
+  /*To create a little more room around the menu, add 20px of space on the inside of the body element by using the padding property.*/
+  padding: 20px;
 }
 
 h1 {
@@ -34,8 +36,19 @@ h1, h2 {
   font-family: Impact, serif;
 }
 
+hr {
+  /*The default value of a property named border-width is 1px for all edges of hr elements.*/
+  height: 2px;
+  background-color: brown;
+  border-color: brown;
+}
+
 .item p {
   display: inline-block;
+  /*margin instead border for spacing between*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .flavor, .dessert {
