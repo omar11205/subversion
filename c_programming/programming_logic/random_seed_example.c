@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 //We want to generate N quadratic equations (ax^2 + bx + c) 
 //randomly where each coefficient is an integer within the range [-30, 30].
@@ -23,7 +24,7 @@ int *aleatory(int seed, int min, int max, int many){ //seed = 1 for time seed ra
 	int *res;
 	if(max<=min){ //error control
 		printf("Interval error: b<=a or b=a \n");
-		void *res = malloc(sizeof(int)); //recasting res to a void pointer to return NULL instead 0 
+		void *res = malloc(sizeof(int)); //casting res to a void pointer to return NULL instead 0 
 		res = NULL;
 		return res;
 	} else {
@@ -46,10 +47,39 @@ int *aleatory(int seed, int min, int max, int many){ //seed = 1 for time seed ra
 	return res;
 	
 }
-	
+
+//0 for multiple real roots, 1 for unique root, 2 for non real roots
+int* discriminant(int *a, int *b, int *c, int n){
+	int *discArr = (int*)malloc(n*sizeof(int));
+	int disc;
+	int i;
+	for(i = 0; i<n; i++){
+		disc = (b[i]*b[i]) - 4*a[i]*c[i];
+		if (disc > 0){
+			discArr[i] = 0;
+		} else if (disc == 0){
+			discArr[i] = 1;
+		} else {
+			discArr[i] = 2;
+		}
+	}
+	return discArr;
+}	
+
+float *quadraticSolutions(int *a, int *b, int *c, int *d, int n){
+	/*float *sol = (float*)malloc(n*sizeof(float));
+	for(){
+		switch (d){
+			case 0:
+				
+			
+		}
+	}	 
+	return sol;*/
+}
 	
 int main(void) {
-	int n = 10; //number of quadratic equations
+	int n = 15; //number of quadratic equations
 	int min = -30;
 	int max = 30;
 	int many = n;
@@ -57,16 +87,21 @@ int main(void) {
 	int *a;
 	int *b;
 	int *c;
+	int *d;
 	
 	a = aleatory(1, min, max, many);
 	Sleep(2000); //if not wait to one or two seconds there is no random time seed and the parameters a,b,c will be equal
 	b = aleatory(1, min, max, many);
 	Sleep(2000);
-	c = aleatory(1, min, max, many); 
+	c = aleatory(1, min, max, many);
 	
-	if (a != NULL && b != NULL && c != NULL){
+	d = discriminant(a, b, c, n);
+	
+	
+	if(a != NULL && b != NULL && c != NULL){
+		printf("discriminant: 0 for multiple real roots, 1 for unique root, 2 for no real roots\n"); 
 		for(i = 0; i<many; i++){
-			printf("equation %d = %dx^2 + %dx + %d = 0\n", i+1, a[i], b[i], c[i]);
+			printf("equation %d = %dx^2 + %dx + %d = 0, discriminant = %d\n", i+1, a[i], b[i], c[i], d[i]);
 		}
 	} else {
 		printf("Alleatory generation failed\n");
@@ -74,5 +109,6 @@ int main(void) {
 	free(a);
 	free(b);
 	free(c);
+	free(d);
 	return 0;
 }
