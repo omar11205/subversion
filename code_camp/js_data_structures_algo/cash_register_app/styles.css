@@ -12,7 +12,15 @@ body {
 h1{
    color: aliceblue;
    text-align: center; 
-   margin: auto;
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
+
+p{
+    color: aliceblue;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 input[type="number"] {
@@ -29,12 +37,14 @@ label{
     margin-bottom: 10px;
     text-align: center; 
     color: floralwhite;
-    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #purchase-btn {
     text-align: center;
     margin: auto;
+
 }
 
 
