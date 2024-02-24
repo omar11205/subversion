@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdbool.h>
+#include <math.h>
 
 //We want to generate N quadratic equations (ax^2 + bx + c) 
 //randomly where each coefficient is an integer within the range [-30, 30].
@@ -17,13 +17,13 @@
 //discriminant logic: 
 //discriminant = b^2 - 4ac 
 //if discriminant > 0, the eq has multiple real roots
-//if discriminant = 0, the eq has unique root
+//if discriminant = 0, the eq has a unique real root
 //if discriminant < 0, the eq has not real roots
 
 int *aleatory(int seed, int min, int max, int many){ //seed = 1 for time seed random generation, a left limit, b right limit,  
 	int *res;
 	if(max<=min){ //error control
-		printf("Interval error: b<=a or b=a \n");
+		printf("Interval error: b<=a \n");
 		void *res = malloc(sizeof(int)); //casting res to a void pointer to return NULL instead 0 
 		res = NULL;
 		return res;
@@ -66,16 +66,26 @@ int* discriminant(int *a, int *b, int *c, int n){
 	return discArr;
 }	
 
-float *quadraticSolutions(int *a, int *b, int *c, int *d, int n){
-	/*float *sol = (float*)malloc(n*sizeof(float));
-	for(){
-		switch (d){
-			case 0:
-				
-			
-		}
-	}	 
-	return sol;*/
+float quadraticSolutionInt(int a, int b, int c, int d) {
+	float sol;
+	float discriminant = ((float)b) * ((float)b) - 4 * ((float)a) * ((float)c);
+	
+	switch (d) {
+	case 0:
+		sol = (-(float)b + sqrt(discriminant)) / (2 * (float)a);
+		break;
+	case 1:
+		sol = (-(float)b - sqrt(discriminant)) / (2 * (float)a);
+		break;
+	case 2:
+		sol = (-(float)b) / (2 * (float)a);
+		break;
+	default:
+		sol = 0;
+		break;
+	}
+	
+	return sol;
 }
 	
 int main(void) {
@@ -88,15 +98,16 @@ int main(void) {
 	int *b;
 	int *c;
 	int *d;
+	float solPos;
+	float solNeg;
+	float solUnique;
 	
 	a = aleatory(1, min, max, many);
-	Sleep(2000); //if not wait to one or two seconds there is no random time seed and the parameters a,b,c will be equal
+	Sleep(2000); // wait one or two seconds for random time seed, otherwise the parameters a,b,c will be equal
 	b = aleatory(1, min, max, many);
 	Sleep(2000);
 	c = aleatory(1, min, max, many);
-	
 	d = discriminant(a, b, c, n);
-	
 	
 	if(a != NULL && b != NULL && c != NULL){
 		printf("discriminant: 0 for multiple real roots, 1 for unique root, 2 for no real roots\n"); 
@@ -106,6 +117,20 @@ int main(void) {
 	} else {
 		printf("Alleatory generation failed\n");
 	}
+	
+	for (i = 0; i<many; i++){
+		if(d[i] == 0){
+			solPos = quadraticSolutionInt(a[i], b[i], c[i], 0);
+			solNeg = quadraticSolutionInt(a[i], b[i], c[i], 1);
+			printf("solutions for equation %d: x1 = %.3f, x2 = %.3f\n", i+1, solPos, solNeg);
+		} else if(d[i] == 1){
+			solUnique = quadraticSolutionInt(a[i], b[i], c[i], 2);
+			printf("solution for equation %d: x = %.3f \n", i+1, solUnique);
+		} else if(d[i] == 2){
+			printf("no real solutions for equation %d (b^2 - 4*a*c)<0 \n", i+1);
+		}
+	}
+	
 	free(a);
 	free(b);
 	free(c);
