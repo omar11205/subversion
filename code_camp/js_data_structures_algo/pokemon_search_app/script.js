@@ -37,6 +37,8 @@ const statsSection = (ids, baseNames, data, status) => {
     }
 };
 
+//the freeCodeCamp regex don't allow a starting page from total scratch, this function call
+//fills by default the table only for this purpose (otherwishe is not necesary)
 statsSection(statsTableIds, baseTableNames, 0, "clear");
 
 const stastIDS =(data)=>{
