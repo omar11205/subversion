@@ -7,6 +7,8 @@ body {
 
 h1 {
   font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -14,7 +16,7 @@ h2 {
 }
 
 .established {
-  font-family: sans-serif;
+  font-family: italic;
 }
 
 h1, h2, p {
@@ -32,15 +34,30 @@ h1, h2, p {
   max-width: 500px;
 }
 
+/*The image you added is not centered horizontally like the Coffee heading above it. img elements are "like" inline elements.*/
+/*There is an easier way, simply add a negative top margin to the img elements to pull them up from their current positions. Negative values are created using a - in front of the value. To complete this project, go ahead and use a negative top margin of 25px in the img type selector.*/
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -25px;
+}
+
+/*The h2 elements have default top and bottom margin space, so you could change the bottom margin of the h2 elements to say 0 or another number.*/
 h1, h2 {
   font-family: Impact, serif;
 }
+
 
 hr {
   /*The default value of a property named border-width is 1px for all edges of hr elements.*/
   height: 2px;
   background-color: brown;
   border-color: brown;
+}
+
+.bottom-line {
+  margin-top: 25px;
 }
 
 .item p {
@@ -59,4 +76,29 @@ hr {
 .price {
   text-align: right;
   width: 25%;
+}
+
+/*FOOTER*/
+
+footer {
+  font-size: 14px;
+}
+
+.address {
+  margin-bottom: 5px;
+}
+
+/*alredy clicked*/
+a:visited {
+  color: black;
+}
+
+/*pass the cursor by*/
+a:hover{
+  color: brown;
+}
+
+/*just clicked*/
+a:active{
+  color: brown;
 }
