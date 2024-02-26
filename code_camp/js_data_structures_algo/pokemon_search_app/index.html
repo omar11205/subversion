@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <form role="search" class="search-section">
+            <label for="search-input">Pokémon Search by Name or ID</label>
+            <input type="text" id="search-input" placeholder="Enter Pokémon name or ID">
+            <button id="search-button">Search</button>
+        </form>
+        <section class="front-section">
+            <div class="name-container">
+                <span id="pokemon-name"></span>
+                <span id="pokemon-id"></span>
+            </div>
+            <div class="physical-container">
+                <span id="weight"></span>
+                <span id="height"></span>
+            </div>
+            <div id="img-sprite-container" class="sprite"></div>
+            <div id="types"></div>
+        </section>
+        <section class="stats-section">
+            <table class="datatable">
+                <tbody id="datatable-tbody">
+                    <tr>
+                        <th>Base</th>
+                        <th>Statistics</th>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
