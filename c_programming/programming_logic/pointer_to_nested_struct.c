@@ -19,13 +19,10 @@ void duplicateFlotating(struct flotating *flt); //the function will take by refe
 
 int main(void) {
 	struct flotating p; //initialize a struct of kind flotating 
-	struct flotating *ptr; //initialize a pointer to an struct of kind flotating
-	ptr = &p; //the pointer ptr points to the memory adress of the struct p 
 	p.x = 10.5;
 	p.y = -1.5;
 	p.flt2.w = 2.5;
 	p.flt2.z = 5.5;
-	
 	
 	printf("after duplicate %f, %f, %f, %f\n", p.x, p.y, p.flt2.w, p.flt2.z);
 	duplicateFlotating(&p);
