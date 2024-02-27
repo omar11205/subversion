@@ -3,11 +3,13 @@
 void cambiarValor (int *parametro){
 	*parametro = 20;
 }
-	void cambiarValorArray (int *parametro){
-		for (int i =0;i<(sizeof(parametro)/sizeof(int));i++){
-			parametro[i] = i+parametro[i]+5;
-		}
+	
+void cambiarValorArray (int *parametro){
+	for (int i =0;i<(sizeof(parametro)/sizeof(int));i++){
+		parametro[i] = i+parametro[i]+5;
 	}
+}
+	
 int main(void){
 	//paso por referencia
 	int argumento = 10;
