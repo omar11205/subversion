@@ -55,9 +55,31 @@ INSERT INTO characters(name, homeland, favorite_color) VALUES('Toadstool', 'Mush
 INSERT INTO characters(name, homeland, favorite_color) VALUES('Daisy', 'Sarasaland', 'Yellow'), ('Yoshi', 'Dinosaur Land', 'Green');
 
 UPDATE characters SET character_id=4 WHERE character_id = 11;
-
 UPDATE characters SET favorite_color='Orange' WHERE name='Daisy';
-
 UPDATE characters SET name='Toad' WHERE favorite_color='Red';
-
 UPDATE characters SET name='Mario' WHERE character_id=1;
+UPDATE characters SET favorite_color='Blue' WHERE character_id=4;
+UPDATE characters SET homeland='Koopa Kingdom' WHERE character_id=5;
+
+--ordering database
+SELECT * FROM characters ORDER BY character_id;
+
+--add a primary key (unique for each table)
+ALTER TABLE characters ADD PRIMARY KEY(name);
+
+--how to drop a constraint
+ALTER TABLE characters DROP CONSTRAINT characters_pkey;
+
+--settin the right primary key
+ALTER TABLE characters ADD PRIMARY KEY(character_id);
+
+--create a new table
+CREATE TABLE more_info();
+ALTER TABLE more_info ADD COLUMN more_info_id SERIAL;
+ALTER TABLE more_info  ADD PRIMARY KEY(more_info_id);
+ALTER TABLE more_info ADD COLUMN birthday DATE;
+ALTER TABLE more_info ADD COLUMN height INT;
+
+--decimal data type
+--NUMERIC(4, 1) has up to four digits and one of them has to be to the right of the decimal
+ALTER TABLE more_info ADD COLUMN weight NUMERIC(4, 1);
