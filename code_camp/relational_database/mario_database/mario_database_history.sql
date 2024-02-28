@@ -135,6 +135,36 @@ av', 1);
 CREATE TABLE actions(action_id SERIAL PRIMARY KEY);
 ALTER TABLE actions ADD COLUMN action VARCHAR(20) UNIQUE NOT NULL;
 
+--the actions table won't have any foreign keys. It's going to have a "many-to-many" relationship with the characters table. This is because many of the characters can perform many actions
+INSERT INTO actions(action) VALUES('run');
+INSERT INTO actions(action) VALUES('jump');
+INSERT INTO actions(action) VALUES('duck');
 
+--Many-to-many relationships usually use a juction table to link two tables together, forming two "one-to-many" relationships. Your characters and anctions table will be linked using a junction table
+CREATE TABLE character_actions();
+--Your junction table will use the primary keys from the characters and actions tables as foreign keys to create the relationship
+ALTER TABLE character_actions ADD COLUMN character_id INT NOT NULL;
+--create first foreign key to characters table
+ALTER TABLE character_actions ADD FOREIGN KEY(character_id) REFERENCES characters(character_id);
+ALTER TABLE character_actions ADD COLUMN action_id INT NOT NULL;
+ALTER TABLE character_actions ADD FOREIGN KEY(action_id) REFERENCES actions(action_id);
 
+--creating a composite primary key: primary key for two columns
+ALTER TABLE character_actions ADD PRIMARY KEY(character_id, action_id);
+--This table will have multiple rows with the same character_id, and multiple rows the same action_id. So neither of them are unique. But you never have the same character_id and action_id in a sigle row. So the two columns together can be used to uniquely identify each row.
 
+--filling character_actions
+INSERT INTO character_actions(character_id, action_id) VALUES(7,1), (7,2), (7,3); 
+INSERT INTO character_actions(character_id, action_id) VALUES(6,1), (6,2), (6,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(5,1), (5,2), (5,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(4,1), (4,2), (4,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(3,1), (3,2), (3,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(2,1), (2,2), (2,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(1,1), (1,2), (1,3);
+
+--FULL JOIN for see foreig key related tables
+--characters with more_info
+SELECT * FROM characters FULL JOIN more_info ON characters.character_id = more_info.character_id;
+--characters with sounds
+SELECT * FROM characters FULL JOIN sounds ON characters.character_id = sounds.character_id;
+--one to many relationship
