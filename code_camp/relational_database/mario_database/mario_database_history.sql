@@ -168,3 +168,4 @@ SELECT * FROM characters FULL JOIN more_info ON characters.character_id = more_i
 --characters with sounds
 SELECT * FROM characters FULL JOIN sounds ON characters.character_id = sounds.character_id;
 --one to many relationship
+

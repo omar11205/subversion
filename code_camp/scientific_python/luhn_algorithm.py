@@ -9,7 +9,10 @@ def verify_card_number(card_number):
     # first four numbers of card number card_number_reversed = card_number[0:4]
 
     # every second digit of the first four digits of card_number
-    card_number_reversed = card_number[0:4:2]
+    card_number_last_two_of_last_four = card_number[0:4:2]
+    card_number_start_to_end = card_number[::]
+    card_number_last_four_reversed = card_number[-1:-5:-1]
+    card_number_reversed = card_number[::-1]
     print(card_number_reversed)
 
 
