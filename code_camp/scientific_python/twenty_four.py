@@ -1,12 +1,14 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
-# import sympy as sy
 
-# Introduction to Number theory with computing (Allemby et al., 1989)
-# 1.  prove that 24 is fascinating for the reason that it is the greatest integer for which n!
-# (factorial n) has exactly n decimal digits.
-# 2. It is the only integer n (n>0) for which 1^2 + 2^2 + ... + n^2 is a square
+'''
+     From Introduction to Number theory with computing (Allemby et al., 1989)
+     1.  prove that 24 is fascinating for the reason that it is the greatest integer for which n!
+     (factorial n) has exactly n decimal digits.
+     2. It is the only integer n (n>0) for which 1^2 + 2^2 + ... + n^2 is a square
+'''
+
 num = 50+1  # inputs
 a = np.empty(shape=(2, num), dtype=np.int32)  # np.array to store (number, number of digits of factorial(number))
 
