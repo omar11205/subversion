@@ -14,6 +14,7 @@ ALTER TABLE galaxy ADD COLUMN distance_from_earth_mlyl INT NOT NULL; --millions 
 ALTER TABLE galaxy ADD COLUMN year_discovery INT NOT NULL;
 
 --tables for stars
+ALTER TABLE star ADD COLUMN distance_from_earth_mlyl INT NOT NULL; --millions of light years
 
 ALTER TABLE planet ADD COLUMN distance_from_star_mlkm INT NOT NULL; --millons of kilometers
 ALTER TABLE planet ADD COLUMN number_satelites INT NOT NULL; --millons of kilometers

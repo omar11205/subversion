@@ -17,7 +17,11 @@ def verify_card_number(card_number):
     for digit in odd_digits:  # "for each element of odd_digits as char"
         # type error, trying to add a string to an integer for that use int(digit)
         sum_of_odd_digits += int(digit)
-        print(sum_of_odd_digits)
+    print(sum_of_odd_digits)
+    sum_of_even_digits = 0
+    even_digits = card_number_reversed[1::2]
+    print(card_number_reversed)
+    print(even_digits)
 
 
 def main():
