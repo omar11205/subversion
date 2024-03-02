@@ -1,14 +1,16 @@
+"""
+    You have accessed elements (characters) of a string before,
+     using the index operator []. You can also use the index operator to access
+     a range of characters in a string with string[x:y:h]:
+     Where x is the starting index, y is the ending index, and h is the step
+     (the amount of characters to skip over).
+     first four numbers of card number card_number_reversed = card_number[0:4]
+     every second digit of the first four digits of card_number
+"""
+
+
 def verify_card_number(card_number):
     sum_of_odd_digits = 0
-    # You have accessed elements (characters) of a string before,
-    # using the index operator []
-    # . You can also use the index operator to access
-    # a range of characters in a string with string[x:y:h]:
-    # Where x is the starting index, y is the ending index, and h is the step
-    # (the amount of characters to skip over).
-    # first four numbers of card number card_number_reversed = card_number[0:4]
-
-    # every second digit of the first four digits of card_number
     card_number_last_two_of_last_four = card_number[0:4:2]
     card_number_start_to_end = card_number[::]
     card_number_last_four_reversed = card_number[-1:-5:-1]
@@ -20,8 +22,10 @@ def verify_card_number(card_number):
     print(sum_of_odd_digits)
     sum_of_even_digits = 0
     even_digits = card_number_reversed[1::2]
-    print(card_number_reversed)
-    print(even_digits)
+    for digit in even_digits:
+        number = int(digit)*2
+        if number >= 10:
+            print(number)
 
 
 def main():
