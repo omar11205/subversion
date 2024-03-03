@@ -7,25 +7,25 @@ CREATE DATABASE universe;
 -- Create the tables
 CREATE TABLE galaxy (
     galaxy_id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL UNIQUE,
-    size INT NOT NULL,
+    name VARCHAR(30) NOT NULL UNIQUE,
+    minor_axis_diameter INT NOT NULL,
     shape TEXT NOT NULL,
     has_black_hole BOOLEAN NOT NULL,
-    num_stars INT
+    num_stars_bill INT
 );
 
 CREATE TABLE star (
     star_id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL UNIQUE,
-    type VARCHAR NOT NULL,
-    age INT,
+    name VARCHAR(30) NOT NULL UNIQUE,
+    type VARCHAR(30) NOT NULL,
+    age_bill_years INT,
     is_visible BOOLEAN NOT NULL,
     galaxy_id INT REFERENCES galaxy(galaxy_id)
 );
 
 CREATE TABLE planet (
     planet_id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL UNIQUE,
+    name VARCHAR(30) NOT NULL UNIQUE,
     diameter NUMERIC NOT NULL,
     atmosphere TEXT,
     has_life BOOLEAN NOT NULL,
@@ -34,28 +34,33 @@ CREATE TABLE planet (
 
 CREATE TABLE moon (
     moon_id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL UNIQUE,
+    name VARCHAR(30) NOT NULL UNIQUE,
     distance_from_planet NUMERIC NOT NULL,
     is_inhabited BOOLEAN NOT NULL,
     planet_id INT REFERENCES planet(planet_id)
 );
 
--- Insert data into the tables
-INSERT INTO galaxy (name, size, shape, has_black_hole, num_stars) VALUES
-('Milky Way', 100000, 'Spiral', TRUE, 400000000),
-('Andromeda', 120000, 'Elliptical', TRUE, 1000000000),
-('Triangulum', 60000, 'Irregular', FALSE, 40000000),
-('Messier 87', 200000, 'Elliptical', TRUE, 600000000),
-('Whirlpool', 80000, 'Spiral', FALSE, 200000000),
-('Sombrero', 70000, 'Spiral', FALSE, 180000000);
+CREATE TABLE asteroid (
+    asteroid_id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL UNIQUE,
+    diameter NUMERIC NOT NULL,
+    is_potentially_hazardous BOOLEAN NOT NULL,
+    galaxy_id INT REFERENCES galaxy(galaxy_id)
+);
 
-INSERT INTO star (name, type, age, is_visible, galaxy_id) VALUES
-('Sun', 'G-type', 4500000000, TRUE, 1),
-('Alpha Centauri', 'G-type', 6000000000, TRUE, 1),
-('Betelgeuse', 'Red Giant', 80000000, TRUE, 2),
-('Vega', 'A-type', 400000000, TRUE, 1),
-('Sirius', 'A-type', 300000000, TRUE, 1),
-('Proxima Centauri', 'M-type', 5000000000, TRUE, 1);
+-- Insert data into the tables
+INSERT INTO galaxy (name, minor_axis_diameter, shape, has_black_hole, num_stars_bill) VALUES
+('Milky Way', 87400, 'Spiral', TRUE, 400),
+('Andromeda', 152300, 'Elliptical', TRUE, 1000),
+('Triangulum', 50000, 'Irregular', FALSE, 10),
+('Messier 87', 93870, 'Elliptical', TRUE, 1000),
+('Whirlpool', 76900, 'Spiral', FALSE, 30),
+('Sombrero', 87400, 'Spiral', FALSE, 100);
+
+INSERT INTO star (name, type, age_bill_years, is_visible, galaxy_id) VALUES ('Sun', 'G-type', 4603, TRUE, 1), 
+('Alpha Centauri', 'G-type', 5500, TRUE, 1), ('Betelgeuse', 'Red Giant', 15000, TRUE, 2), 
+('Vega', 'A-type', 600, TRUE, 1), ('Sirius', 'A-type', 2750, TRUE, 1), 
+('Proxima Centauri', 'M-type', 4850, TRUE, 1);
 
 INSERT INTO planet (name, diameter, atmosphere, has_life, star_id) VALUES
 ('Earth', 12742, 'Nitrogen, Oxygen', TRUE, 1),
@@ -92,6 +97,18 @@ INSERT INTO moon (name, distance_from_planet, is_inhabited, planet_id) VALUES
 ('Umbriel', 266300, FALSE, 6),
 ('Titania', 436300, FALSE, 6),
 ('Callisto', 1882700, FALSE, 3);
+
+INSERT INTO asteroid (name, diameter, is_potentially_hazardous, galaxy_id) VALUES
+('Apophis', 370, TRUE, 2),
+('Bennu', 492, TRUE, 1),
+('Ceres', 939, FALSE, 1),
+('Vesta', 525, FALSE, 1),
+('Eros', 34, FALSE, 1),
+('Gaspra', 19, FALSE, 1),
+('Ida', 31, FALSE, 1),
+('Mathilde', 52, FALSE, 1),
+('Kleopatra', 135, FALSE, 1),
+('Psyche', 226, FALSE, 1);
 
 -- Check the data in the tables
 SELECT * FROM galaxy;
