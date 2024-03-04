@@ -1,0 +1,30 @@
+//basics
+ls -l           # list orderly
+pwd             # project working directory
+cd ../..        # go back two diretories
+mkdir           # make directory
+touch           # create a file
+ls -a           # don not ignore (.gitingore for example)
+mv              # move, used to rename files mv <file-name> <new-file-name>
+cp              # copy, cp <file> <directory>
+rmdir           # remove directory 
+rm -r fonts/    # remove revursively the folter fonts/
+rm              # remove a file
+man <command>   # open the manual for the command
+
+//search
+find -name index.html   #find index.html
+find -name src          #fin a folder name src
+
+//bash scripting
+touch file.sh       <-- create a bash/shell reading file
+sh file.sh          <-- open the file with shell
+bash file.sh        <-- open the file with bash
+#!/bin/bash         <-- set bash as default file executer inside a .sh file
+chmod +x file.sh    <-- give permission to execute like a binary './file.sh'
+echo -e "\n some text \n"   <-- print space "some text" space
+echo $*             <-- print all the arguments passed to the script (inside file.sh)
+./file.sh arg1 arg2 arg3 <-- print: arg1 arg2 arg3
+
+
+
