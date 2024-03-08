@@ -5,22 +5,46 @@
 
 //binary search splits in two the array and start verifing from the center to left and right; if the element is big than the most-left element all the left part will be discarted
 
-
-int busquedaBinaria(int A[], int N, int elem){ //if the element is not present in the array returns -1, the position starts with 0
-	int ini=0;
-	int fin=N-1;
-	int med = (ini+fin)/2;
+int binarySearchGPT(int A[], int N, int elem) {
+	int start = 0;
+	int end = N - 1;
+	int mid;
 	
-	while(ini<=fin && elem != A[med]){
-		if(elem < A[med])
-			fin = med - 1;
-		else
-			ini = med + 1;
+	while (start <= end) {
+		mid = (start + end) / 2;
 		
-		med = (ini + fin)/2;
+		// If element is found at mid
+		if (A[mid] == elem)
+			return mid;
+		
+		// If element is greater, search in the left half
+		else if (elem < A[mid])
+			end = mid - 1;
+		
+		// If element is smaller, search in the right half
+		else
+			start = mid + 1;
 	}
-	if(ini<=fin)
-		return med;
+	
+	// If element is not present in the array
+	return -1;
+}
+
+int binarySearch2(int A[], int N, int elem){ //if the element is not present in the array returns -1, the position starts with 0
+	int start=0;
+	int end=N-1;
+	int mid = (start+end)/2;
+	
+	while(start<=end && elem!=A[mid]){
+		if(elem < A[mid])
+			end = mid - 1;
+		else
+			start = mid + 1;
+		
+		mid = (start + end)/2;
+	}
+	if(start<=end)
+		return mid;
 	else
 		return -1;
 }
@@ -41,12 +65,19 @@ void bubbleSort(int A[], int N){
 	
 	
 int main(void) {
-	int arr[] = {100,1,5,62,54,847,54,67,20,69,95,12,36,45,65,57};
+	int arr[] = {100,1,5,62,504,847,400,59,200,100,150,54,67,20,69,95,12,36,45,65,57,2};
 	int n = sizeof(arr)/sizeof(int);
+	int result;
+	int searchingfor = 847;
+	
 	bubbleSort(arr, n);
 	for(int i = 0; i<n; i++){
-		printf("El[%d]: %d\n", (i+1), arr[i]);
+		printf("El[%d]: %d\n", i, arr[i]);
 	}
+	printf("Searching for %d\n", searchingfor);
+	result = binarySearch2(arr, n, searchingfor);
+	printf("The position of %d in the array is: %d\n", searchingfor, result);
+	
 	return 0;
 }
 	
