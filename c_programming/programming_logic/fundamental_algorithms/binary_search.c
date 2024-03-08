@@ -3,7 +3,8 @@
 //binary search is a search algorithm optimized for ordered lists.
 //to order the list use bubbleSort
 
-//binary search splits in two the array and starts verifing 
+//binary search splits in two the array and start verifing from the center to left and right; if the element is big than the most-left element all the left part will be discarted
+
 
 int busquedaBinaria(int A[], int N, int elem){ //if the element is not present in the array returns -1, the position starts with 0
 	int ini=0;
