@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #define TMAX 40
 
-typedef char tString[TMAX];
+typedef char tString[TMAX]; //maximum legth of the custom strings tString = 39 characters
 
 typedef struct{
 	int numPages;
@@ -47,6 +47,17 @@ int main(void) {
 	tBookList books;
 	tBook book;
 	tString bookName;
+	opc = menu();
+	while(opc != 0){
+		system("cls"); //clear console
+		switch(opc){
+			case 1:
+				if(N < TMAX)
+					printf(" --- Insert new book --- \n");
+					book = newBook();
+					insertOrderedBook(books, &N, book);
+		}
+	}
 	return 0;
 }
 
@@ -74,4 +85,49 @@ int menu(){
 	clearBuffer();
 	
 	return opc;
+}
+	
+void scanString(tString s){
+	char c;
+	int i = 0;
+	
+	while (i < TMAX-1 && (c=getchar()) != EOF && c != '\n'){
+		s[i] = c;
+		i++
+	}
+	
+	s[j] = '\0';
+	clearBuffer();
+}
+	
+tBook newBook(){
+	tBook book;
+	int i;
+	
+	printf("Provide the book ISBN: "); scanf("%ld", &book.isbn); clearBuffer();
+	printf("Provide the book name: "); scanString(book.name);
+	printf("Input the number of book authors: "); scanf("%d", &book.numAuthors); clearBuffer();
+	printf("\n");
+	
+	for(i=0; i<book.numAuthors; i++){
+		printf("Provide the author name # %d: ", i);
+		scanString(book.authors[i]);
+	}
+	
+	printf("\nIngrese la cantidad de páginas del libro: "); scanf("%d", &book.numPages); clearBuffer();
+	printf("Input the book price: USD $"); scanf("%f", &book.price); clearBuffer();
+	
+	return book;
+}
+	
+void insertOrderedBook(tBookList books, int *N, tBook newB){
+	int i = *N - 1;
+	
+	while(i>=0 && strcmp(newB.name, books[i].name) < 0){
+		books[i+1] = books[i];
+		i--;
+	}
+	
+	books[i+1] = newB;
+	*N = *N + 1;
 }
