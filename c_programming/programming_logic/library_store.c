@@ -52,11 +52,21 @@ int main(void) {
 		system("cls"); //clear console
 		switch(opc){
 			case 1:
-				if(N < TMAX)
+				if(N < TMAX){
 					printf(" --- Insert new book --- \n");
 					book = newBook();
 					insertOrderedBook(books, &N, book);
-		}
+					printf("The book has been successfully added\n");
+				} else {
+					printf("The book was not added. Maximum number of books reached\n")
+				}
+				break;
+			case 2: 
+				printf(" --- Update book price --- \n");
+				printf("Input the name of the book to be updated: ");
+				scanString(bookName);
+				pos = 
+		}	
 	}
 	return 0;
 }

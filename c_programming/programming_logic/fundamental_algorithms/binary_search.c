@@ -65,10 +65,10 @@ void bubbleSort(int A[], int N){
 	
 	
 int main(void) {
-	int arr[] = {100,1,5,62,504,847,400,59,200,100,150,54,67,20,69,95,12,36,45,65,57,2};
+	int arr[] = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 	int n = sizeof(arr)/sizeof(int);
 	int result;
-	int searchingfor = 847;
+	int searchingfor = 6;
 	
 	bubbleSort(arr, n);
 	for(int i = 0; i<n; i++){
