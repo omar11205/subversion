@@ -58,16 +58,68 @@ int main(void) {
 					insertOrderedBook(books, &N, book);
 					printf("The book has been successfully added\n");
 				} else {
-					printf("The book was not added. Maximum number of books reached\n")
+					printf("The book was not added. Maximum number of books reached\n");
 				}
 				break;
 			case 2: 
 				printf(" --- Update book price --- \n");
-				printf("Input the name of the book to be updated: ");
+				printf("Input the name of the book to be updated: \n");
 				scanString(bookName);
-				pos = 
-		}	
+				pos = binarySearch(books, N, bookName);
+				
+				if(pos != -1){
+					updateBookPrice(&books[pos]);
+					printf("Book updated successfully\n");
+				} else {
+					printf("We are sorry. The book you're trying to update was not found\n");
+				}
+				break;
+			case 3:
+				if (N>0){
+					printf(" --- Delete a book ---\n");
+					printf("Input the name of the book to be deleted: ");
+					scanString(bookName);
+					pos = binarySearch(books, N, bookName);
+					
+					if(pos != -1){
+						deleteBook(books, &N, pos);
+						printf("\nThe book was succcesfully deleted.\n");
+					} else {
+						printf("We are sorry. The book you're trying to delete was not found\n");
+					}
+				} else {
+					printf("There are no books in the record\n");
+				}
+				break;
+			case 4:
+				printf(" --- Show a book --- \n");
+				printf("Input the name of the book to be shown");
+				scanString(bookName);
+				pos = binarySearch(books, N, bookName);
+				
+				if(pos != -1){
+					showBook(books[pos]);
+				} else {
+					printf("We are sorry. The book you're trying to show was not found\n");
+				}
+				
+				break;
+			case 5:
+				if(N > 0){
+					printf(" --- Show books --- \n");
+					showBooks(books, N);
+				} else {
+					printf("There are any book to show\n");
+				}
+			break;	
+		}
+		system("pause");
+		system("cls");
+		opc = menu();
+		
 	}
+	printf("Thank you for using our library system. See you later\n");
+	
 	return 0;
 }
 
@@ -103,10 +155,10 @@ void scanString(tString s){
 	
 	while (i < TMAX-1 && (c=getchar()) != EOF && c != '\n'){
 		s[i] = c;
-		i++
+		i++;
 	}
 	
-	s[j] = '\0';
+	s[i] = '\0';
 	clearBuffer();
 }
 	
@@ -140,4 +192,63 @@ void insertOrderedBook(tBookList books, int *N, tBook newB){
 	
 	books[i+1] = newB;
 	*N = *N + 1;
+}
+	
+int binarySearch(tBookList books, int N, tString name){
+	int start = 0;
+	int end = N - 1;
+	int mid = (start+end)/2;
+	//compares these two strings lexicographically, and then returns 0,1, or -1 as the result.
+	while(start<=end && strcmp(name, books[mid].name)!=0){
+		if(strcmp(name, books[mid].name) < 0){
+			end = mid - 1;
+		} else {
+			start = mid + 1;
+		}
+		
+		mid = (start + end)/2;
+	}
+	if (start<=end){
+		return mid;
+	} else {
+		return -1;
+	}
+}
+	
+void updateBookPrice(tBook *book){
+	printf("Input the new book price(USD) $: ");
+	scanf("%f", &book->price);
+	clearBuffer();
+}
+	
+void deleteBook(tBookList books, int *N, int pos){
+	int i;
+	
+	for(i = pos; i < (*N-1); i++){
+		books[i] = books[i+1];
+	}
+	*N = *N - 1;
+}
+	
+void showBook(tBook book){
+	int i;
+	
+	printf("ISBN: %ld\n", book.isbn);
+	printf("Book name: %s\n", book.name);
+	printf("Authors: ");
+	for(i=0; i<book.numAuthors; i++){
+		printf("%s ", book.authors[i]);
+	}
+	printf("\n");
+	printf("Number of pages: %d\n", book.numPages);
+	printf("Price: (USD) $%0.2f\n", book.price);
+}
+	
+void showBooks(tBookList books, int N){
+	int i;
+	
+	for(i=0; i<N; i++){
+		showBook(books[i]);
+		printf("\n");
+	}
 }
