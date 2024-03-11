@@ -1,11 +1,14 @@
 """
-    You have accessed elements (characters) of a string before,
-     using the index operator []. You can also use the index operator to access
-     a range of characters in a string with string[x:y:h]:
-     Where x is the starting index, y is the ending index, and h is the step
-     (the amount of characters to skip over).
-     first four numbers of card number card_number_reversed = card_number[0:4]
-     every second digit of the first four digits of card_number
+The Luhn algorithm is as follows:
+
+From the right to left, double the value of every second digit; if the product is greater than 9, sum the digits of the products.
+Take the sum of all the digits.
+If the sum of all the digits is a multiple of 10, then the number is valid; else it is not valid.
+Assume an example of an account number "7992739871" that will have a check digit added, making it of the form 7992739871x:
+
+Account number      7   9  9  2  7  3  9   8  7  1  x
+Double every other  7  18  9  4  7  6  9  16  7  2  x
+Sum 2-char digits   7   9  9  4  7  6  9   7  7  2  x
 """
 
 

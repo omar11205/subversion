@@ -16,7 +16,7 @@ int sequentialSearch(int A[], int N, int elem) {//if the element is not present 
 	
 }
 
-int main(int argc, char *argv[]) {
+int main(void) {
 	int arr[] = {1,2,3,4,5,6,7,8,9,12,14,45,67,32,13};
 	int n = sizeof(arr)/sizeof(int);
 	int elem = 12;
