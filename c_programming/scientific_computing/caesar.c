@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+//this is the same example developed in 
+//https://www.freecodecamp.org/learn/scientific-computing-with-python/learn-string-manipulation-by-building-a-cipher/
 
 //A Caesar cipher (or Caesar code), is a shift cipher. Is one of the most 
 //easy and most famous encryption systems. Uses the substitution of a letter
