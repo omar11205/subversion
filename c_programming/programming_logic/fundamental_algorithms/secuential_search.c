@@ -17,11 +17,12 @@ int sequentialSearch(int A[], int N, int elem) {//if the element is not present 
 }
 
 int main(void) {
-	int arr[] = {1,2,3,4,5,6,7,8,9,12,14,45,67,32,13};
+	int arr[] = {1};
 	int n = sizeof(arr)/sizeof(int);
-	int elem = 12;
+	int elem = 1;
 	int index = sequentialSearch(arr, n, elem);
-	if (index > 0){
+	printf("n: %d\n", n);
+	if (index >= 0){
 		printf("The position was: %d\n", index);
 	} else {
 		printf("The element is'n in the array arr\n"); 

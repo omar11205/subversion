@@ -15,18 +15,18 @@
 #include <stdlib.h>
 #define TMAX 40
 
-typedef char tString[TMAX]; //maximum legth of the custom strings tString = 39 characters
+typedef char tString[TMAX]; //maximum length of the custom strings tString = 39 characters
 
 typedef struct{
 	int numPages;
 	int numAuthors;
-	long isbn;
+	long isbn;				//ISBN: will be acepted as a long int 
 	float price;
 	tString name;
-	tString authors[TMAX];
+	tString authors[TMAX]; //maximum allowed authors per book = 39
 } tBook;
 
-typedef tBook tBookList[TMAX];
+typedef tBook tBookList[TMAX]; //maximum allowed books = 39
 
 //defining function prototypes
 int menu();
