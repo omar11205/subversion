@@ -32,11 +32,24 @@ def generate_password(length, nums, special_chars, uppercase, lowercase):
         # Generating Password
         for _ in range(length):
             password += secrets.choice(all_characters)
-        constraints = [(nums, '')]
+        constraints = [
+            (nums, r'[0-9]'),
+            (lowercase, r'[a-z]'),
+            (uppercase, r'[A-Z]'),
+            (special_chars, (special_chars, r'[^a-zA-Z0-9]'))  # negates (^) all characters except special ones
+        ]
 
 
 # new_password = generate_password(8)
 # print(new_password)
-pattern = 'l+'
+# pattern = 'w[ha]' <- match wh or wa
+# pattern = '[^a-z]t' <- match all that isn't a-z followed by a t
+# pattern = '.+' <- matches one or more occurrences of any character except for a newline
+# pattern = '\.' <- scape the special character . to find points
+# n Python, a raw string is a string literal prefixed with an 'r' or 'R'.
+# When you prefix a string with 'r' or 'R', Python treats backslashes ('\')
+# as literal characters, rather than as escape characters.
+# pattern = r'\.'
+pattern = r'l+'
 quote = 'Not all those who wander are lost.'
 print(re.findall(pattern, quote))
