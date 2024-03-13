@@ -21,6 +21,11 @@ Sum 2-char digits   7   9  9  4  7  6  9   7  7  2  x
 int main(void) {
 	char str[] = "4111-1111-4555-1142";
 	printf("%s", str);
+
+	int legth = 10;
+	for (int i = 0; i<legth; ++i){
+		printf("%d\n", i);
+	}
 	return 0;
 }
 
