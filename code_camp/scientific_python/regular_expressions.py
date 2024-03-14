@@ -8,7 +8,7 @@ import string
 '''
 
 
-def generate_password(length, nums, special_chars, uppercase, lowercase):
+def generate_password(length=8, nums=1, special_chars=1, uppercase=1, lowercase=1):
     # Define the possible characters for the password
     letters = string.ascii_letters
     digits = string.digits
@@ -36,12 +36,31 @@ def generate_password(length, nums, special_chars, uppercase, lowercase):
             (nums, r'[0-9]'),
             (lowercase, r'[a-z]'),
             (uppercase, r'[A-Z]'),
-            (special_chars, (special_chars, r'[^a-zA-Z0-9]'))  # negates (^) all characters except special ones
+            (special_chars, fr'[{symbols}]')
+            # matches all ascii symbols
+            # r'' + f'' = fr''
+            # f'' is used for string interpolation
         ]
+        # all is a function who evaluates if all the conditions passed in form of a list are true and returns True
+        # otherwise returns False: all([conditional1, conditional2, ...]) but it can be shorted to
+        # all(conditional1, conditional2, ...)
+        # using list comprehension syntax I can do in order to create a list of conditionals
+        # and evaluate if all are True:
+        #
+        # if all([
+        #   constraint <= len(re.findall(pattern, password))
+        #   for constraint, pattern in constraints
+        # ]):
+        #   break
+        # and simplifying:
+        if all(
+            constraint <= len(re.findall(pattern, password))
+            for constraint, pattern in constraints
+        ):
+            break
+    return password
 
 
-# new_password = generate_password(8)
-# print(new_password)
 # pattern = 'w[ha]' <- match wh or wa
 # pattern = '[^a-z]t' <- match all that isn't a-z followed by a t
 # pattern = '.+' <- matches one or more occurrences of any character except for a newline
@@ -49,7 +68,14 @@ def generate_password(length, nums, special_chars, uppercase, lowercase):
 # n Python, a raw string is a string literal prefixed with an 'r' or 'R'.
 # When you prefix a string with 'r' or 'R', Python treats backslashes ('\')
 # as literal characters, rather than as escape characters.
-# pattern = r'\.'
-pattern = r'l+'
-quote = 'Not all those who wander are lost.'
-print(re.findall(pattern, quote))
+# pattern = r'\.' <- now matches '\.'
+# pattern = r'\d' matches decimals like a normal regular expression for javascript or other languages
+# pattern = r'\D' matches all characters less decimals == [^0-9]
+# pattern = r'\w' matches all alphanumeric characters and '_'
+# pattern = r'\W' matches all characters less alphanumeric characters and '_'
+
+
+if __name__ == '__main__':
+    new_password = generate_password()
+    print(new_password)
+
