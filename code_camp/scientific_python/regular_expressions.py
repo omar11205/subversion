@@ -24,7 +24,7 @@ def generate_password(length=8, nums=1, special_chars=1, uppercase=1, lowercase=
     # print(random.choice(all_characters))
     # print(all_characters)
 
-    # However random module is still predictable, so for cryptographic purpuses use instead
+    # However random module is still predictable, so for cryptographic purposes use instead
     # the secrets module
     # print(secrets.choice(all_characters))
     while True:

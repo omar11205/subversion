@@ -1,10 +1,11 @@
-'''
+"""
     Convert from camelCase or PascalCase to snake_case
     Use the ''.join() string method to convert the list of characters into a string.
-    For PascalCase: The easiest way to strip such unwanted character 
+    For PascalCase: The easiest way to strip such unwanted character
     is by using the .strip() string method and passing
     an underscore to the method as argument.
-'''
+"""
+
 
 def convert_to_snake_case(pascal_or_camel_cased_string):
     snake_cased_char_list = []
