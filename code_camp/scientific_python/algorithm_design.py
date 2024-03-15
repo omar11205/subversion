@@ -22,11 +22,28 @@ my_graph = {
 # Then it will explore the graph to find the shortest path between the starting node,
 # or source, and all the other nodes.
 
+# At the beginning, all the other nodes in the graph are considered to be at infinite distance from the source node,
+# because the distance has not been determined yet.
 
-def shortest_path(graph, start):
+
+def shortest_path_for(graph, start):
     unvisited = []
     distances = {}
     for node in graph:
         unvisited.append(node)
         if node == start:
             distances[node] = 0
+        else:
+            distances[node] = float('inf')
+    print(f'Unvisited: {unvisited}\nDistances: {distances}')
+
+
+# The list() type constructor enables you to build a list from an iterable.
+def shortest_path_list(graph, start):
+    unvisited = list(graph)
+    distances = {}
+    paths = {key: [] for key in graph}
+
+
+shortest_path_for(my_graph, 'A')
+

@@ -1,0 +1,75 @@
+Develop a PHP Algorithm
+
+Given the concepts indicating the start and end time of regular hours (HO), extra hours (HED), and overnight extra hours (HEN), it is required to determine the total regular hours (HO), extra hours (HED), and overnight extra hours (HEN) worked by an employee according to their clock-in and clock-out times.
+
+A concept will be in the form:
+
+{"name":"HO","start":"08:00","end":"17:59","id":"HO"}
+This indicates that the HO concept starts at 08:00 and ends at 17:59.
+
+There will be a function that receives the concepts, along with a clock-in time and a clock-out time, and within that time range, it should output a list of concepts with their total duration.
+
+This will be the function signature:
+function classifyAttendances($concepts, $attendanceIn,
+$attendanceOut)
+
+That is, if we pass these parameters to the function:
+concepts:[
+{
+    "id": "HO",
+    "name": "HO",
+    "start": "08:00",
+    "end": "17:59"
+},
+{
+    "id": "HED",
+    "name": "HED",
+    "start": "18:00",
+    "end": "20:59"
+},
+{
+    "id": "HEN",
+    "name": "HEN",
+    "start": "21:00",
+    "end": "05:59"
+}
+]
+
+attendanceIn: 08:00
+attendanceOut: 11:30
+
+The JSON returned by the function with the list of concepts and corresponding hours would be:
+{"HO":3.5}
+
+While if we vary the query range with these values:
+
+concepts:[
+{
+    "name": "HO",
+    "id": "HO",
+    "start": "08:00",
+    "end": "17:59"
+},
+{
+    "id": "HED",
+    "name": "HED",
+    "start": "18:00",
+    "end": "20:59"
+},
+{
+    "id": "HEN",
+    "name": "HEN",
+    "start": "21:00",
+    "end": "05:59"
+}]
+
+attendanceIn: 14:00
+attendanceOut: 21:30
+
+The output JSON of the function should be:
+{"HO":4, "HED":3, "HEN":0.5}
+
+Note
+In case of having multiple concepts in the response, follow the order: HO, HED, HEN
+
+Complete the function: function classifyAttendances($concepts, $attendanceIn,$attendanceOut)
