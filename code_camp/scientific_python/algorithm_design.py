@@ -45,8 +45,9 @@ def shortest_path_list(graph, start):
     paths = {key: [] for key in graph}
     paths[start].append(start)
     while unvisited:
-        current = min(unvisited)
-
+        current = min(unvisited, key=distances.get)
+        for node, distance in graph[current]:
+            pass
     print(f'Unvisited: {unvisited}\nDistances: {distances}\nPaths: {paths}')
 
 
