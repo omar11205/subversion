@@ -41,9 +41,14 @@ def shortest_path_for(graph, start):
 # The list() type constructor enables you to build a list from an iterable.
 def shortest_path_list(graph, start):
     unvisited = list(graph)
-    distances = {}
+    distances = {node: 0 if node == start else float('inf') for node in graph}
     paths = {key: [] for key in graph}
+    paths[start].append(start)
+    while unvisited:
+        current = min(unvisited)
+
+    print(f'Unvisited: {unvisited}\nDistances: {distances}\nPaths: {paths}')
 
 
-shortest_path_for(my_graph, 'A')
+# shortest_path_list(my_graph, 'A')
 
