@@ -1,4 +1,8 @@
 # use a dictionaries to represent graphs
+# https://www.geeksforgeeks.org/building-an-undirected-graph-and-finding-shortest-path-using-dictionaries-in-python/
+# https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+# https://www.geeksforgeeks.org/introduction-to-queue-data-structure-and-algorithm-tutorials/
+# https://www.geeksforgeeks.org/fifo-first-in-first-out-approach-in-programming/
 # A graph is a non-linear data structure, which consists of vertices(or nodes) connected by edges(or arcs)
 # where edges may be directed or undirected.
 # the keys represent the current node and the values represent to what node OR nodes are connected the current node
