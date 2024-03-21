@@ -4,7 +4,7 @@ pwd             # project working directory
 cd ../..        # go back two diretories
 mkdir           # make directory
 touch           # create a file
-ls -a           # don not ignore (.gitingore for example)
+ls -a           # do not ignore (.gitingore for example)
 mv              # move, used to rename files mv <file-name> <new-file-name>
 cp              # copy, cp <file> <directory>
 rmdir           # remove directory 

@@ -1,4 +1,4 @@
-/* From Introduction to number theory with computing, 1989.  
+/* From Introduction to number theory with computing, Allemby et al. 1989.  
 Create an algorithm to proff by bruteforce  the Fermat Last Theorem: 
 if n is a positive integer greather than 2, no positive integers X, Y and Z 
 satisfy the equation, X^n + Y^n = Z^n */
