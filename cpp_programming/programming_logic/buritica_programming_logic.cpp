@@ -1,4 +1,4 @@
-//from Programming Logic (Buritica, 2023) 
+//from chapters 6 and 7 in Programming Logic (Buritica, 2023) 
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -56,7 +56,7 @@ void example_3_number_of_digits() {
 	cout << "Provide an integer number: ";
 	cin >> num;
 	num = abs(num);
-	temp = num;
+	temp = abs(num);
 	while (num > 0) {
 		num = num / 10;
 		counter++;
@@ -69,20 +69,40 @@ void example_4_cascade_number_of_digits() {
 	//Read an integer number and determine if it has one, two, tree or four digits.
 	//Validate if the number is not negative
 	int num;
+	int temp;
+	int counter = 0;
 	cout << "Provide an integer number: ";
 	cin >> num;
 	if (num < 0) {
 		num = (-1) * (num);
-	} else {
-		return; //complete the algorithm
 	}
+	temp = num;
+	while (num > 0) {
+		num = num / 10;
+		counter++;
+	}
+	if (counter == 1) {
+		cout << "The number " << temp << " has one digit" << endl;
+		return; //complete the algorithm
+	} else if (counter == 2) {
+		cout << "The number " << temp << " has two digits" << endl;
+	} else if (counter == 3) {
+		cout << "The number " << temp << " has tree digits" << endl;
+	} else if (counter == 4) {
+		cout << "The number " << temp << " has four digits" << endl;
+	}
+	return;
+}
+
+void example_5_sequence_decisions(){
+	return; //complete the algorithm
 }
 
 int main()
 {   
-	//example_4_cascade_number_of_digits;
+	//example_4_cascade_number_of_digits();
 	//example_3_number_of_digits();
-	//example_2_simple_positive_even();
-	//example_1_last_digit_comparison();
+	//example_2_last_digit_comparison();
+	//example_1_simple_positive_even();
 	system("pause>0");
 }
