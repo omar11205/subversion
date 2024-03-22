@@ -94,10 +94,6 @@ void example_4_cascade_number_of_digits() {
 	return;
 }
 
-void example_5_sequence_decisions(){
-	return; //complete the algorithm
-}
-
 int main()
 {   
 	//example_4_cascade_number_of_digits();
