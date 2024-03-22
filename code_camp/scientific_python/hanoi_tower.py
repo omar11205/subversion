@@ -16,13 +16,38 @@ rods = {
     'C': []
 }
 
+
+def make_allowed_move():
+    pass
+
+
+"""
+    In Python, negative indexing allows you to access elements from the end of a list. So when you use rods['A'][-1], 
+    it's accessing the last element of the list associated with the key 'A'.
+"""
+
 def move(n, source, auxiliary, target):
     # display starting configuration
     print(rods)
     for i in range(number_of_moves):
         remainder = (i + 1) % 3
-        if remainder == 1:  # //1 divided by 3: 3*0 = 0, one minus cero = 1, thus remainder = 1
+
+        if remainder == 1:  # 1 divided by 3: 3*0 = 0, one minus cero = 1, thus remainder = 1
+
             print(f'Move {i+1} allowed between {source} and {target}')
+            forward = False
+            if not rods[target]:
+                forward = True
+            elif rods[source] and rods[source][-1] < rods[target][-1]:
+                forward = True
+            if forward:
+                print(f'Moving disk {rods[source][-1]} from {source} to {target}')
+                rods[target].append(rods[source].pop())
+            else:
+                print(f'Moving disk {rods[target][-1]} from {target} to {source}')
+                rods[source].append(rods[target].pop())
+            # display our progress
+            print(rods)
         elif remainder == 2:
             print(f'Move {i+1} allowed between {source} and {auxiliary}')
         elif remainder == 0:
