@@ -3,6 +3,8 @@
 
 using namespace std;
 
+//g++ -o run buritica_programming_logic_ch_7_exe.cpp
+
 void endsWithNumber(int endsWith) {
 	//Read an integer number and determine if it's a number that ends with 4
 	int number;
@@ -40,7 +42,21 @@ void haveNDigits(int n){
 	return;
 }
 
+void isNegative(){
+	//read a integer number and determine if it's a negative number
+	int num;
+	cout << "Provide an integer number: ";
+	cin >> num;
+	if (num > 0){
+		cout << "The provided number " << num << " is not a negative number." << endl; 
+	} else {
+		cout << "The provided number " << num << " is a negative number." << endl; 
+	}
+	return;
+}
+
 int main() {
+	//isNegative();
 	//haveNDigits(3);
 	//endsWithNumber(4);
 	return 0;
