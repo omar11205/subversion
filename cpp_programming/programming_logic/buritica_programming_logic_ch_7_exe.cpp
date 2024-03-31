@@ -55,7 +55,28 @@ void isNegative(){
 	return;
 }
 
+void twoDigitsSum(){
+	//Read an integer number with two digits and determine the sum of its digits.
+	int num1;
+	int num2;
+	int num3;
+	cout << "Provide a two digits integer (-100, -10) U (10, 100): ";
+	cin >> num1;
+	if (abs(num1) < 100 && abs(num1) > 9){
+		num2 = num1/10;
+		num3 = abs(num1 - num2*10);
+		cout << "The digits of " << num1 << " are: " << num2 << " and " << num3 << endl;
+		cout << "And its sum is: " << num2 + num3 << endl;
+	} else {
+		cout << "The provided number must be a two cipher integer" << endl;
+		return;
+	}
+	return;
+}
+
+
 int main() {
+	//twoDigitsSum();
 	//isNegative();
 	//haveNDigits(3);
 	//endsWithNumber(4);
