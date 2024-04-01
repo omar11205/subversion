@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
-
+//cplusplus 201703L
 //g++ -o run buritica_programming_logic_ch_7_exe.cpp
+
+using namespace std;
 
 void endsWithNumber(int);
 void haveNDigits(int);
