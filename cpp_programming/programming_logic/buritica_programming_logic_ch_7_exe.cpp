@@ -9,10 +9,14 @@ void endsWithNumber(int);
 void haveNDigits(int);
 void isNegative();
 void twoDigitsSum();
+void twoDigitsEven();
 void lessTwentyPrimes();
+void twoDigitsPrimes();
 
 int main() {
-	lessTwentyPrimes();
+	twoDigitsPrimes();
+	//lessTwentyPrimes();
+	//twoDigitsEven();
 	//twoDigitsSum();
 	//isNegative();
 	//haveNDigits(3);
@@ -21,7 +25,7 @@ int main() {
 }
 
 void endsWithNumber(int endsWith) {
-	//Read an integer number and determine if it's a number that ends with 4
+	//1. Read an integer number and determine if it's a number that ends with 4.
 	int number;
 	cout << "Enter an integer: ";
 	cin >> number;
@@ -33,11 +37,10 @@ void endsWithNumber(int endsWith) {
 	} else {
 		cout << "The last digit of " << number << " is not " << endsWith << endl;
 	}
-	return;
 }
 
 void haveNDigits(int n){
-	//Read an integer number and determine if it have 3 digits
+	//2. Read an integer number and determine if it have 3 digits.
 	int num;
 	int temp;
 	int counter = 0;
@@ -54,11 +57,10 @@ void haveNDigits(int n){
 	} else {
 		cout << "The number of digits of " << temp << " is not " << n << endl;
 	}
-	return;
 }
 	
 void isNegative(){
-	//read a integer number and determine if it's a negative number
+	//3. Read a integer number and determine if it's a negative number.
 	int num;
 	cout << "Provide an integer number: ";
 	cin >> num;
@@ -67,29 +69,48 @@ void isNegative(){
 	} else {
 		cout << "The provided number " << num << " is a negative number." << endl; 
 	}
-	return;
 }
 	
 void twoDigitsSum(){
-	//Read an integer number with two digits and determine the sum of its digits.
-	int num1;
-	int num2;
-	int num3;
+	//4. Read an integer number with two digits and determine the sum of its digits.
+	int num;
+	int firstD;
+	int secondD;
 	cout << "Provide a two digits integer (-100, -10) U (10, 100): ";
-	cin >> num1;
-	if (abs(num1) < 100 && abs(num1) > 9){
-		num2 = num1/10;
-		num3 = abs(num1 - num2*10);
-		cout << "The digits of " << num1 << " are: " << num2 << " and " << num3 << endl;
-		cout << "And its sum is: " << num2 + num3 << endl;
+	cin >> num;
+	if (abs(num) < 100 && abs(num) > 9){
+		firstD = num/10;
+		secondD = abs(num - firstD*10);
+		cout << "The digits of " << num << " are: " << firstD << " and " << secondD << endl;
+		cout << "And its sum is: " << firstD + secondD << endl;
 	} else {
 		cout << "The provided number must be a two cipher integer" << endl;
 		return;
 	}
-	return;
 }
+
+void twoDigitsEven(){
+	//5. Read an integer number of two digits and determine if both digits are even.
+	int num;
+	int sum = 0;
+	int temp;
+	
+	cout << "Enter a two-digit integer: ";
+	cin >> num;
+	temp = num;
+	
+	for (int i = 0; i<2; i++){
+		sum += temp % 10; //Extract the last digit and add it to the sum
+		temp /= 10; //removing the last digit
+	}
+	
+	//Display the result 
+	cout << "The sum of the digits is: " << sum << endl;
+}	
+
 	
 void lessTwentyPrimes(){
+	//6.Read an integer number of two digits less than 20 and determine if it is prime.
 	int num1;
 	cout << "Provide a positive integer between [10, 20): ";
 	cin >> num1;
@@ -106,6 +127,28 @@ void lessTwentyPrimes(){
 	} else {
 		cout << "The number " << num1 << " is out of range [10, 20)" << endl;
 		return;
+	}
+}
+
+void twoDigitsPrimes(){
+	// 7. Read an integer number of two digits and determine if it is prime and also if it is negative.
+	int num;
+	cout << "Provide a positive integer less than 100: ";
+	cin >> num;
+	if (num <= 1){
+		cout << "There are no primes less than or equal to 1" << endl;
+		return;
+	} else if (num >= 100){
+		cout << "The number must be less than 100" << endl;
+		return;
+	} else {
+		for (int i = 2; i*i <= num; i++){
+			if (num % i == 0){
+				cout << "The number " << num << " is not a prime number" << endl;
+				return;
+			}
+		}
+		cout << "The number " << num << " is a prime number" << endl;
 	}
 }
 	
