@@ -16,23 +16,22 @@ class Board:
         for index, line in enumerate(self.board):
             row_list = []
             for square_no, part in enumerate([line[:3], line[3:6], line[6:]], start=1):
-                for item in part:
-                    row_square = '|'.join(str(item) for item in part)
-                    row_list.extend(row_square)
-                    if square_no != 3:
-                        row_list.append('║')
+                row_square = '|'.join(str(item) for item in part)
+                row_list.extend(row_square)
+                if square_no != 3:
+                    row_list.append('║')
 
-                row = f'║ {" ".join(row_list)} ║\n'
-                row_empty = row.replace('0', ' ')
-                board_string += row_empty
+            row = f'║ {" ".join(row_list)} ║\n'
+            row_empty = row.replace('0', ' ')
+            board_string += row_empty
 
-                if index < 8:
-                    if index % 3 == 2:
-                        board_string += f'╠═══{"╪═══" * 2}{"╬═══"}{"╪═══" * 2}{"╬═══"}{"╪═══" * 2}╣\n'
-                    else:
-                        board_string += middle_lines
+            if index < 8:
+                if index % 3 == 2:
+                    board_string += f'╠═══{"╪═══" * 2}{"╬═══"}{"╪═══" * 2}{"╬═══"}{"╪═══" * 2}╣\n'
                 else:
-                    board_string += lower_lines
+                    board_string += middle_lines
+            else:
+                board_string += lower_lines
         return board_string
 
     # method who finds the empty cells in the sudoku board
@@ -79,8 +78,54 @@ class Board:
         valid_in_col = self.valid_in_col(col, num)
         valid_in_square = self.valid_in_square(row, col, num)
         return all([valid_in_row, valid_in_col, valid_in_square])
-    
+
     # solve the sudoku in place. The method will modify the existing sudoku board instead of creating a new one
     def solver(self):
-        pass
+        # the walrus operator (:=) assigns and returns the content of a variable
+        """
+            The 'is' operator in Python is used to check if two variables point to the same object.
+            Unlike the '==' operator, which checks if the values of two objects are equal, the 'is' operator
+            goes one step further to ensure that they are, in fact, the exact same object.
+        """
+        if (next_empty := self.find_empty_cell()) is None:
+            return True
+        else:
+            for guess in range(1, 10):
+                if self.is_valid(next_empty, guess):
+                    row, col = next_empty
+                    self.board[row][col] = guess
+                    if self.solver():
+                        return True
+                    self.board[row][col] = 0
+
+        return False
+
+
+# solving the sudoku
+def solve_sudoku(board):
+    gameboard = Board(board)
+    print(f'\nPuzzle to solve:\n{gameboard}')
+    if gameboard.solver():
+        print('\nSolved puzzle:')
+        print(gameboard)
+    else:
+        print('\nThe provided puzzle is unsolvable.')
+    return gameboard
+
+
+puzzle = [
+  [0, 0, 2, 0, 0, 8, 0, 0, 0],
+  [0, 0, 0, 0, 0, 3, 7, 6, 2],
+  [4, 3, 0, 0, 0, 0, 8, 0, 0],
+  [0, 5, 0, 0, 3, 0, 0, 9, 0],
+  [0, 4, 0, 0, 0, 0, 0, 2, 6],
+  [0, 0, 0, 4, 6, 7, 0, 0, 0],
+  [0, 8, 6, 7, 0, 4, 0, 0, 0],
+  [0, 0, 0, 5, 1, 9, 0, 0, 8],
+  [1, 7, 0, 0, 0, 6, 0, 0, 5]
+]
+
+solve_sudoku(puzzle)
+
+
 
