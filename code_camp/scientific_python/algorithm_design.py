@@ -71,5 +71,5 @@ def shortest_path_list(graph, start, target=''):
     return distances, paths
 
 
-shortest_path_list(my_graph, 'A', "F")
+shortest_path_list(my_graph, 'B', "F")
 
