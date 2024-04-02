@@ -63,4 +63,16 @@ class BinarySearchTree:
             node.key = self._min_value(node.right)
             node.right = self._delete(node.right, node.key)
         return node
-    
+
+    def _min_value(self, node):
+        while node.left is not None:
+            node = node.left
+        return node.key
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_traversal(self.root, result)
+        return result
+
+    def _inorder_traversal(self, node, result):
+        pass
