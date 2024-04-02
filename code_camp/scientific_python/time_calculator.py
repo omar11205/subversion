@@ -1,4 +1,3 @@
-
 def add_time(start, duration, start_day=None):
     # Parsing start time
     start_time, period = start.split()
@@ -21,13 +20,7 @@ def add_time(start, duration, start_day=None):
         new_hour = 12
 
     # Constructing new_time string
-    new_time = f"{new_hour:02}:{new_minute:02} {new_period}"
-
-    # Handling days later
-    if days_passed == 1:
-        new_time += " (next day)"
-    elif days_passed > 1:
-        new_time += f" ({days_passed} days later)"
+    new_time = f"{new_hour}:{new_minute:02} {new_period}"
 
     # Handling start_day parameter
     if start_day:
@@ -38,9 +31,18 @@ def add_time(start, duration, start_day=None):
         new_day = days_of_week[new_day_index]
         new_time += f", {new_day}"
 
-    new_time = str(new_time)
+    # Handling days later
+    if days_passed == 1:
+        new_time += " (next day)"
+    elif days_passed > 1:
+        new_time += f" ({days_passed} days later)"
+
     return new_time
 
 
-print(add_time('3:30 PM', '2:12'))  # Should return '5:42 PM'
-add_time('11:55 AM', '3:12')  # Should return '3:07 PM'
+b = '5:42 PM'
+a = add_time('3:30 PM', '2:12')  # Should return '3:07 PM'
+if a == '5:42 PM':
+    print(True)
+else:
+    print(False)
