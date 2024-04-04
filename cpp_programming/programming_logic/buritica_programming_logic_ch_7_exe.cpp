@@ -16,18 +16,20 @@ void lessTwentyPrimes();
 void twoDigitsPrimes();
 void twoBothDigitsPrimes();
 void twoDigitsMultiple();
+void twoDigitsEqual();
 
 int main() {
-	twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
+	twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
+	//twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
 	//twoBothDigitsPrimes();	//8. Read an integer number of two digits and determine if its two digits are prime
-	//twoDigitsPrimes();
-	//lessTwentyPrimes();
+	//twoDigitsPrimes();		//7. Read an integer number of two digits and determine if it is prime and also if it is negative.
+	//lessTwentyPrimes();		//6. Read an integer number of two digits less than 20 and determine if it is prime.
 	//twoDigitsEven();			//5. Read an integer number of two digits and determine if both digits are even.
-	//nDigitsSum(3);
+	//nDigitsSum(3);			//4.1 Read a positive integer number with n digits and determine the sum of its digits.
 	//twoDigitsSum();			//4. Read an integer number with two digits and determine the sum of its digits.
-	//isNegative();
-	//haveNDigits(3);
-	//endsWithNumber(4);
+	//isNegative();				//3. Read a integer number and determine if it's a negative number.
+	//haveNDigits(3);			//2. Read an integer number and determine if it have 3 digits.
+	//endsWithNumber(4);		//1. Read an integer number and determine if it's a number that ends with 4.
 	return 0;
 }
 
@@ -261,6 +263,33 @@ void twoDigitsMultiple(){
 			cout << "The number " << arr[1] << " is multiple of " << arr[0] << endl;
 		} else {
 			cout << "Neither digit of " << num << " is a multiple of the other." << endl;
+		}
+	}
+}
+	
+void twoDigitsEqual(){
+	//10. Read an integer number of two digits and determine if both digits are equal.
+	int num;
+	int arr[2] = {};
+	cout << "Provide a positive integer between [10, 100): ";
+	cin >> num;
+	
+	if (num < 10 || num > 100){
+		
+		cout << "The number: " << num << " must be in the range [10, 100)." << endl;
+		return;
+		
+	} else {
+		
+		for (int i = 0; i<2; i++){
+			arr[i] = num % 10; //Extract the last digit and add it to the array
+			num /= 10; //removing the last digit
+		}
+		
+		if (arr[0] == arr[1]){
+			cout << "The number " << arr[0] << " is equal to " << arr[1] << endl;
+		} else {
+			cout << "The number " << arr[0] << " is not equal to " << arr[1] << endl;
 		}
 	}
 }
