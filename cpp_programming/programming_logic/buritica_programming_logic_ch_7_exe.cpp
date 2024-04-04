@@ -15,9 +15,11 @@ void twoDigitsEven();
 void lessTwentyPrimes();
 void twoDigitsPrimes();
 void twoBothDigitsPrimes();
+void twoDigitsMultiple();
 
 int main() {
-	twoBothDigitsPrimes();		//8. Read an integer number of two digits and determine if its two digits are prime
+	twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
+	//twoBothDigitsPrimes();	//8. Read an integer number of two digits and determine if its two digits are prime
 	//twoDigitsPrimes();
 	//lessTwentyPrimes();
 	//twoDigitsEven();			//5. Read an integer number of two digits and determine if both digits are even.
@@ -233,5 +235,23 @@ void twoBothDigitsPrimes(){
 	
 void twoDigitsMultiple(){
 	//9. Read an integer number of two digits and determine if one digit is a multiple of the other.
-	return;
+	// An integer a it's mutiple of another integer b if the residual of a/b its equal to cero
+	int num;
+	cout << "Enter an integer (two digits): ";
+	cin >> num;
+	
+	// Extract the individual digits
+	int tensDigit = num / 10;
+	int onesDigit = num % 10;
+	
+	// Check if one digit is a multiple of the other
+	if (tensDigit != 0 && onesDigit != 0) {
+		if (tensDigit % onesDigit == 0 || onesDigit % tensDigit == 0) {
+			cout << "One digit is a multiple of the other." << endl;
+		} else {
+			cout << "Neither digit is a multiple of the other." << endl;
+		}
+	} else {
+		cout << "Invalid input. Please enter a two-digit integer." << endl;
+	}
 }
