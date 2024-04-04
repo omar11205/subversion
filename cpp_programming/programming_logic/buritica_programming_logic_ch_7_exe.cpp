@@ -237,21 +237,30 @@ void twoDigitsMultiple(){
 	//9. Read an integer number of two digits and determine if one digit is a multiple of the other.
 	// An integer a it's mutiple of another integer b if the residual of a/b its equal to cero
 	int num;
-	cout << "Enter an integer (two digits): ";
+	int temp;
+	int arr[2] = {};
+	cout << "Provide a positive integer between [10, 100): ";
 	cin >> num;
 	
-	// Extract the individual digits
-	int tensDigit = num / 10;
-	int onesDigit = num % 10;
-	
-	// Check if one digit is a multiple of the other
-	if (tensDigit != 0 && onesDigit != 0) {
-		if (tensDigit % onesDigit == 0 || onesDigit % tensDigit == 0) {
-			cout << "One digit is a multiple of the other." << endl;
-		} else {
-			cout << "Neither digit is a multiple of the other." << endl;
-		}
+	if (num < 10 || num > 100){
+		
+		cout << "The number: " << num << " must be in the range [10, 100)." << endl;
+		return;
+		
 	} else {
-		cout << "Invalid input. Please enter a two-digit integer." << endl;
+		
+		temp = num;
+		for (int i = 0; i<2; i++){
+			arr[i] = temp % 10; //Extract the last digit and add it to the array
+			temp /= 10; //removing the last digit
+		}
+		
+		if (arr[0] % arr[1] == 0){
+			cout << "The number " << arr[0] << " is multiple of " << arr[1] << endl;
+		} else if (arr[1] % arr[0] == 0) {
+			cout << "The number " << arr[1] << " is multiple of " << arr[0] << endl;
+		} else {
+			cout << "Neither digit of " << num << " is a multiple of the other." << endl;
+		}
 	}
 }
