@@ -313,3 +313,15 @@ void greatherInteger(){
 		cout << "Neither integer is greather than the other (=)" << endl;
 	}
 }
+	
+void commonDigits(){
+	//12. Read two integer numbers of two digits and determine if it have common digits
+	int a;
+	int b;
+	cout << "Provide an integer number: ";
+	cin >> a;
+	cout << "Provide another integer number: ";
+	cin >> b;
+	
+	
+}
