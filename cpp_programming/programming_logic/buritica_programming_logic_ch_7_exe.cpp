@@ -17,9 +17,11 @@ void twoDigitsPrimes();
 void twoBothDigitsPrimes();
 void twoDigitsMultiple();
 void twoDigitsEqual();
+void greatherInteger();
 
 int main() {
-	twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
+	greatherInteger();			//11. Read two integers and determine the greater
+	//twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
 	//twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
 	//twoBothDigitsPrimes();	//8. Read an integer number of two digits and determine if its two digits are prime
 	//twoDigitsPrimes();		//7. Read an integer number of two digits and determine if it is prime and also if it is negative.
@@ -291,5 +293,23 @@ void twoDigitsEqual(){
 		} else {
 			cout << "The number " << arr[0] << " is not equal to " << arr[1] << endl;
 		}
+	}
+}
+	
+void greatherInteger(){
+	//11. Read two integers and determine the greater
+	int a;
+	int b;
+	cout << "Provide an integer number: ";
+	cin >> a;
+	cout << "Provide another integer number: ";
+	cin >> b;
+	
+	if (a>b){
+		cout << "The integer " << a << " is greather than the integer " << b << endl;
+	} else if (a<b) {
+		cout << "The integer " << b << " is greather than the integer " << a << endl;
+	} else {
+		cout << "Neither integer is greather than the other (=)" << endl;
 	}
 }
