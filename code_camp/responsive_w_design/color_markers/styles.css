@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+}
+
+/*There are two main color models: the additive RGB (red, green, blue) model used in electronic devices, 
+and the subtractive CMYK (cyan, magenta, yellow, black) model used in print.*/
+
+.container {
+  background-color: rgb(0, 0, 0); 
+}
+
+.marker {
+  width: 200px;
+  height: 25px;
+  /*When the shorthand margin property has two values, 
+  it sets margin-top and margin-bottom to the first value, 
+  and margin-left and margin-right to the second value.*/
+  margin: 10px auto;
+}
+
+.one {
+  background-color: rgb(255, 0, 0);
+}
+
+.two {
+  background-color: rgb(0, 255, 0);
+}
+
+.three {
+  background-color: rgb(0, 0, 255);
+}

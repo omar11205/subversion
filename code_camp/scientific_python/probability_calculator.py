@@ -6,6 +6,7 @@ import random
     randomly from a hat.
 """
 
+
 class Hat:
     def __init__(self, **kwargs):
         self.contents = []
