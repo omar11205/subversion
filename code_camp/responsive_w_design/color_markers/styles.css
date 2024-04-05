@@ -2,11 +2,22 @@ h1 {
   text-align: center;
 }
 
-/*There are two main color models: the additive RGB (red, green, blue) model used in electronic devices, 
-and the subtractive CMYK (cyan, magenta, yellow, black) model used in print.*/
+/*There are two main color models: the additive 
+RGB (red, green, blue) model used in electronic devices, 
+and the subtractive CMYK (cyan, magenta, yellow, black) 
+model used in print.*/
 
 .container {
-  background-color: rgb(0, 0, 0); 
+  /*
+  In the .container CSS rule, 
+  use the shorthand padding property to add 10px of top and bottom 
+  padding, and set the left and right padding to 0. 
+  This works similarly to the shorthand margin property 
+  you used earlier.*/
+  /*to create white background-color: rgb(255, 255, 255);*/
+  /*to create black background-color: rgb(0, 0, 0);*/
+  background-color: rgb(255, 255, 255);
+  padding: 10px 0; 
 }
 
 .marker {
@@ -19,13 +30,13 @@ and the subtractive CMYK (cyan, magenta, yellow, black) model used in print.*/
 }
 
 .one {
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(255, 255, 0);
 }
 
 .two {
-  background-color: rgb(0, 255, 0);
+  background-color: rgb(0, 255, 255);
 }
 
 .three {
-  background-color: rgb(0, 0, 255);
+  background-color: rgb(255, 0, 255);
 }
