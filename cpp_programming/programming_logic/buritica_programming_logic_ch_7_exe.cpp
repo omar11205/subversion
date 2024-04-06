@@ -18,9 +18,11 @@ void twoBothDigitsPrimes();
 void twoDigitsMultiple();
 void twoDigitsEqual();
 void greatherInteger();
+void commonDigits();
 
 int main() {
-	greatherInteger();			//11. Read two integers and determine the greater
+	commonDigits();				//12. Read two integer numbers of two digits and determine if it have common digits
+	//greatherInteger();		//11. Read two integers and determine the greater
 	//twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
 	//twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
 	//twoBothDigitsPrimes();	//8. Read an integer number of two digits and determine if its two digits are prime
@@ -316,12 +318,42 @@ void greatherInteger(){
 	
 void commonDigits(){
 	//12. Read two integer numbers of two digits and determine if it have common digits
-	int a;
-	int b;
+	int a, b;
 	cout << "Provide an integer number: ";
 	cin >> a;
+	while (a < 10 || a > 99) {
+		cout << "Please provide a two-digit number: ";
+		cin >> a;
+	}
+	
 	cout << "Provide another integer number: ";
 	cin >> b;
+	while (b < 10 || b > 99) {
+		cout << "Please provide a two-digit number: ";
+		cin >> b;
+	}
+	
+	// Extracting digits from the first number
+	int a_digit1 = a / 10;
+	int a_digit2 = a % 10;
+	
+	// Extracting digits from the second number
+	int b_digit1 = b / 10;
+	int b_digit2 = b % 10;
+	
+	// Check if they have common digits
+	bool hasCommon = false;
+	if (a_digit1 == b_digit1 || a_digit1 == b_digit2 || 
+		a_digit2 == b_digit1 || a_digit2 == b_digit2) {
+		hasCommon = true;
+	}
+	
+	// Output the result
+	if (hasCommon) {
+		cout << "The numbers have common digits." << endl;
+	} else {
+		cout << "The numbers do not have common digits." << endl;
+	}
 	
 	
 }
