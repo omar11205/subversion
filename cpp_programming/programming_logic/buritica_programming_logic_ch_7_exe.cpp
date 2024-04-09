@@ -19,9 +19,11 @@ void twoDigitsMultiple();
 void twoDigitsEqual();
 void greatherInteger();
 void commonDigits();
+void areSumDigitsEven();
 
 int main() {
-	commonDigits();				//12. Read two integer numbers of two digits and determine if it have common digits
+	areSumDigitsEven();			//13. Read two numbers and determine if the sum of the two numbers results in an even number
+	//commonDigits();			//12. Read two integer numbers of two digits and determine if it have common digits
 	//greatherInteger();		//11. Read two integers and determine the greater
 	//twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
 	//twoDigitsMultiple();		//9. Read an integer number of two digits and determine if one digit is a multiple of the other.		
@@ -357,3 +359,35 @@ void commonDigits(){
 	
 	
 }
+	
+void areSumDigitsEven(){
+	//13. Read two numbers and determine if the sum of the two numbers results in an even number
+	int num1, num2;
+	cout << "Enter the first number: ";
+	cin >> num1;
+	cout << "Enter the second number: ";
+	cin >> num2;
+	
+	// Calculate sum of the two numbers
+	int sum = num1 + num2;
+	
+	// Calculate sum of digits
+	int sumOfDigits = 0;
+	while (sum > 0) {
+		sumOfDigits += sum % 10;
+		sum /= 10;
+	}
+	
+	// Check if sum of digits is even
+	if (sumOfDigits % 2 == 0) {
+		cout << "The sum of the digits of " << num1 << " and " << num2 << " results in an even number." << endl;
+	} else {
+		cout << "The sum of the digits of " << num1 << " and " << num2 << " results in an odd number." << endl;
+	}
+}
+	
+
+
+	
+	
+	
