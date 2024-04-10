@@ -20,9 +20,11 @@ void twoDigitsEqual();
 void greatherInteger();
 void commonDigits();
 void areSumDigitsEven();
+void firstOneHundredEven();
 
 int main() {
-	areSumDigitsEven();			//13. Read two numbers and determine if the sum of the two numbers results in an even number
+	firstOneHundredEven();
+	//areSumDigitsEven();			//13. Read two numbers and determine if the sum of the two numbers results in an even number
 	//commonDigits();			//12. Read two integer numbers of two digits and determine if it have common digits
 	//greatherInteger();		//11. Read two integers and determine the greater
 	//twoDigitsEqual();			//10. Read an integer number of two digits and determine if both digits are equal.
@@ -385,7 +387,14 @@ void areSumDigitsEven(){
 		cout << "The sum of the digits of " << num1 << " and " << num2 << " results in an odd number." << endl;
 	}
 }
+
+void firstOneHundredEven(){
+	int n = 100; // Number of even numbers
+	int last_even_number = 200; // Last even number
+	int sum = (n * (last_even_number + 1)) / 2; // Sum formula
 	
+	cout << "Sum of the first " << n << " even numbers: " << sum << endl;
+}
 
 
 	
