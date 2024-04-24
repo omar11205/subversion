@@ -42,8 +42,9 @@ def vigenere(message, key, direction=1):
     return final_message
 
 
-caesar(text, shift)
-encryption = vigenere(text, custom_key)
-print(encryption)
-decryption = vigenere(encryption, custom_key, -1)
-print(decryption)
+print(text[0])
+# caesar(text, shift)
+# encryption = vigenere(text, custom_key)
+# print(encryption)
+# decryption = vigenere(encryption, custom_key, -1)
+# print(decryption)
