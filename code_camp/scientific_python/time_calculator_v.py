@@ -16,7 +16,7 @@ def add_time(start_time, time_add, start_day=''):
     days_later = []
 
     # time output string
-    output = []
+    output = ''
 
     if (hours_add > 0) or (minutes_add > 0):
         res_minutes = minutes + minutes_add
