@@ -25,7 +25,7 @@ float mcex(float x, float n){
 	return term;
 }
 
-float numericalMethod(float x, float es, int maxit){
+float numericalMethod(float x, float es, int maxit, int type = 0){
 	//x = number to estimate; es = detention criteria; maxit = maximum iterations
 	int iter = 1; //current iterations
 	float sol = 1; //initializing solution for the first term of mclaurin for e^x (1)
@@ -41,16 +41,23 @@ float numericalMethod(float x, float es, int maxit){
 		}
 	} while(ea>=es || iter>=maxit);
 	
-	return sol;
+	//if type = 1 return the number of iterations 
+	if (type == 1){
+		return iter;
+	} else {
+		return sol;
+	}
 }	
 
 int main(int argc, char *argv[]) {
 	
 	float x = 1;
-	float es = 0.1;
+	float es = 0.01;
 	float maxit = 100;
 	float result = numericalMethod(x, es, maxit);
-	cout << "Result for error of 0.1%: " << result; 
+	cout << "Result for error of " << es << "%: " << result << "\n";
+	float iterations = numericalMethod(x, es, maxit, 1);
+	cout << "Number of iterations needed: " << iterations; 
 	
 	return 0;
 }
